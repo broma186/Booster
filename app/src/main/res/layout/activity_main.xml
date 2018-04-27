@@ -1,20 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:background="@color/colorBooster"
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_drawer_layout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
 
-    <TextView
-        android:id="@+id/main_info_text"
-        android:padding="42dp"
-        android:textColor="@android:color/white"
-        android:textAlignment="center"
-        android:fontFamily="@font/circular_book"
-        android:textSize="22dp"
-        android:gravity="center"
-        android:text="@string/main_menu_text"
+    <FrameLayout
+        android:id="@+id/container"
+        android:background="@color/colorBooster"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent">
 
-</android.support.constraint.ConstraintLayout>
+        <include android:id="@+id/toolbar" layout="@layout/toolbar" />
+
+    </FrameLayout>
+
+    <android.support.design.widget.NavigationView
+        android:id="@+id/nav_items"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:fitsSystemWindows="true"
+        app:menu="@menu/investor_type_menu"
+        app:headerLayout="@layout/investor_types_header" />
+
+</android.support.v4.widget.DrawerLayout>

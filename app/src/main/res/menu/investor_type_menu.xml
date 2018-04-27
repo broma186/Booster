@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/defensive_type"
+        android:title="@string/defensive_type_title" />
+    <item
+        android:id="@+id/conservative_type"
+        android:title="@string/conservative_type_title" />
+    <item
+        android:id="@+id/balanced_type"
+        android:title="@string/balanced_type_title" />
+    <item
+        android:id="@+id/balanced_growth"
+        android:title="@string/balanced_growth_title" />
+    <item
+        android:id="@+id/growth"
+        android:title="@string/growth_title" />
+    <item
+        android:id="@+id/aggressive_growth"
+        android:title="@string/aggressive_growth_title" />
+</menu>
