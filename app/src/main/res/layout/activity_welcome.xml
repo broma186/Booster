@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/colorBooster"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    tools:context="project.matthew.booster.UI.WelcomeActivity"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <ImageView
+        android:id="@+id/booster_title_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/welcome_button"
+        android:layout_alignParentStart="true"
+        android:src="@drawable/booster_logo" />
+    <Button
+        android:id="@+id/welcome_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="@string/welcome" />
+</RelativeLayout>

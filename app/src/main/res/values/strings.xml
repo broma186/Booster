@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">Booster</string>
     <string name="welcome">Welcome!</string>
+    <string name="menu_title">main_menu_title</string>
+    <string name="menu_icon_title">main_menu_icon_title</string>
+    <string name="main_menu_text">This app helps you find out what type of investor you are. Use the menu
+    to access the features. This app consists of information about the Booster Kiwisaver Investment Fund and a risk questionnaire which allows you to calculate which fund suits you.</string>
+
 </resources>
