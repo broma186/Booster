@@ -7,5 +7,5 @@ import android.view.MenuItem;
  */
 
 public interface NavigationSetupInterface {
-    public void handleMenuItemChecking(MenuItem selectedItem);
+    public void setupNavigationDrawer();
 }

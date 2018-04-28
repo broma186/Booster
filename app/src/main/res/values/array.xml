@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="nav_items">
+        <item>Investor Types</item>
+        <item>Defensive</item>
+        <item>Conservative</item>
+        <item>Balanced</item>
+        <item>Balanced Growth</item>
+        <item>Growth</item>
+        <item>Aggressive Growth</item>
+        <item>Questionnaire</item>
+        <item>Submit</item>
+    </string-array>
+</resources>

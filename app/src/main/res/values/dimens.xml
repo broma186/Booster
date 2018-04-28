@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Navigation Drawer -->
+    <dimen name="nav_drawer_list_item_text_size">20dp</dimen>
+</resources>

@@ -16,14 +16,13 @@
 
     </FrameLayout>
 
-    <android.support.design.widget.NavigationView
-        android:id="@+id/nav_items"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:background="@android:color/holo_green_light"
-        android:layout_gravity="start"
-        android:fitsSystemWindows="true"
-        app:menu="@menu/investor_type_menu"
-        app:headerLayout="@layout/investor_types_header" />
+    <!-- The navigation drawer -->
+    <ListView
+        android:id="@+id/nav_drawer_list"
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:choiceMode="singleChoice"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="0dp" />
 
 </android.support.v4.widget.DrawerLayout>

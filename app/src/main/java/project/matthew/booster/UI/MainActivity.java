@@ -4,39 +4,48 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toolbar;
+import android.widget.AdapterView;
+import android.widget.ListView;
+import android.widget.TextView;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import project.matthew.booster.R;
-import project.matthew.booster.UI.Interfaces.MainActivitySetupInterface;
+import project.matthew.booster.UI.Adapters.NavigationDrawerListAdapter;
+import project.matthew.booster.UI.Interfaces.ToolbarSetupInterface;
 import project.matthew.booster.UI.Interfaces.NavigationSetupInterface;
 
 /**
  * Created by Matthew on 27/04/2018.
  */
 
-public class MainActivity extends AppCompatActivity implements MainActivitySetupInterface, NavigationSetupInterface {
+public class MainActivity extends AppCompatActivity implements ToolbarSetupInterface, NavigationSetupInterface {
     private static final String TAG = "MainActivity";
+
     @BindView(R.id.nav_drawer_layout)
     DrawerLayout mDrawerLayout;
-
-    @BindView(R.id.nav_items)
-    NavigationView mNavView;
 
     @BindView(R.id.toolbar)
     android.support.v7.widget.Toolbar mToolbar;
 
+    private NavigationDrawerListAdapter mNavDrawerAdapter;
+    private ListView mNavigationDrawerList;
     private ActionBarDrawerToggle mActionBarDrawerToggle;
+
+    private int mSelectedNavDrawerPosition;
+    private Object mCurrentFragment;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -45,26 +54,26 @@ public class MainActivity extends AppCompatActivity implements MainActivitySetup
         ButterKnife.bind(this);
 
         initToolbar();
-        initNavItemSelectListener();
+        hideToolbarTitle();
+        setupNavigationDrawer();
 
     }
 
     @Override
     public void initToolbar() {
         setSupportActionBar(mToolbar);
+    }
+
+    @Override
+    public void hideToolbarTitle() {
         getSupportActionBar().setDisplayShowTitleEnabled(false);
     }
 
     @Override
-    public void initNavItemSelectListener() {
-        mNavView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem selectedItem) {
-                handleMenuItemChecking(selectedItem);
-                mDrawerLayout.closeDrawers();
-                return true;
-            }
-        });
+    public void setupNavigationDrawer() {
+        mNavDrawerAdapter = new NavigationDrawerListAdapter(this);
+        mNavigationDrawerList = (ListView) findViewById(R.id.nav_drawer_list);
+        mNavigationDrawerList.setAdapter(mNavDrawerAdapter);
 
         mActionBarDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,
                 mToolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close) {
@@ -78,19 +87,80 @@ public class MainActivity extends AppCompatActivity implements MainActivitySetup
                 super.onDrawerOpened(drawerView);
             }
         };
-    }
 
-    @Override
-    public void handleMenuItemChecking(MenuItem selectedItem) {
-        selectedItem.setChecked(true);
-        for (int i = 0; i < mNavView.getMenu().size(); i++) {
-            MenuItem oneOfAllMenuTitles = mNavView.getMenu().getItem(i);
-            if (oneOfAllMenuTitles.getTitle() != selectedItem.getTitle() && oneOfAllMenuTitles.isChecked()) {
-                oneOfAllMenuTitles.setChecked(false);
+        mNavigationDrawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                TextView navItemTextView = (TextView)view.findViewById(R.id.nav_title);
+                if (navItemTextView != null) {
+                    String navItemTitle = (String) navItemTextView.getText();
+                    switch (navItemTitle) {
+                        case "Investor Types":
+                           // showFragment();
+                            break;
+                        case "Defensive":
+                            break;
+                        case "Conservative":
+                            break;
+                        case "Balanced":
+                            break;
+                        case "Balanced Growth":
+                            break;
+                        case "Growth":
+                            break;
+                        case "Aggressive Growth":
+                            break;
+                        case "Questionnaire":
+                            break;
+                        case "Submit":
+                            break;
+                    }
+                }
             }
-        }
+            private void showFragment(int position, Object fragment) {
+                mSelectedNavDrawerPosition = position;
+                mDrawerLayout.closeDrawer(GravityCompat.START);
 
+                // Remove the current fragment
+                if (mCurrentFragment != null) {
+                    if (mCurrentFragment instanceof Fragment) {
+                        FragmentManager fragmentManager = getSupportFragmentManager();
+                        fragmentManager.beginTransaction()
+                                .remove((Fragment) mCurrentFragment)
+                                .commitAllowingStateLoss();
+                    }
+                }
+                mNavDrawerAdapter.setSelectedItem(position); // Update new Fragment position.
+
+                // Replace the new Fragment.
+                if (!MainActivity.this.isDestroyed()) {
+                    if (fragment instanceof Fragment) {
+                        FragmentManager fragmentManager = getSupportFragmentManager();
+                        fragmentManager.beginTransaction()
+                                .replace(R.id.container, (Fragment) fragment)
+                                .commitAllowingStateLoss();
+                    }
+                    mCurrentFragment = fragment;
+                 /*   if (mCurrentFragment instanceof ParkingSelectionContainerFragment) {
+                        setTitle("Buy parking");
+                    } else if (mCurrentFragment instanceof CurrentParkingContainerFragment) {
+                        setTitle("Current parking");
+                    } else if (mCurrentFragment instanceof VehicleListFragment) {
+                        setTitle("My vehicles");
+                    } else if (mCurrentFragment instanceof TopupFragment) {
+                        setTitle("Top up");
+                    } else if (mCurrentFragment instanceof AboutFragment) {
+                        setTitle("About this app");
+                    } else if (mCurrentFragment instanceof OrganisationListFragment) {
+                        setTitle("Organisations");
+                    } else if (mCurrentFragment instanceof OccupancyFragment) {
+                        setTitle("Find a park");
+                    }*/
+                }
+            }
+        });
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
