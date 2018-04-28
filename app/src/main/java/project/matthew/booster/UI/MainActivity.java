@@ -7,6 +7,8 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -17,13 +19,14 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import project.matthew.booster.R;
 import project.matthew.booster.UI.Interfaces.MainActivitySetupInterface;
+import project.matthew.booster.UI.Interfaces.NavigationSetupInterface;
 
 /**
  * Created by Matthew on 27/04/2018.
  */
 
-public class MainActivity extends AppCompatActivity implements MainActivitySetupInterface {
-
+public class MainActivity extends AppCompatActivity implements MainActivitySetupInterface, NavigationSetupInterface {
+    private static final String TAG = "MainActivity";
     @BindView(R.id.nav_drawer_layout)
     DrawerLayout mDrawerLayout;
 
@@ -56,8 +59,8 @@ public class MainActivity extends AppCompatActivity implements MainActivitySetup
     public void initNavItemSelectListener() {
         mNavView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                item.setChecked(true);
+            public boolean onNavigationItemSelected(@NonNull MenuItem selectedItem) {
+                handleMenuItemChecking(selectedItem);
                 mDrawerLayout.closeDrawers();
                 return true;
             }
@@ -78,12 +81,30 @@ public class MainActivity extends AppCompatActivity implements MainActivitySetup
     }
 
     @Override
+    public void handleMenuItemChecking(MenuItem selectedItem) {
+        selectedItem.setChecked(true);
+        for (int i = 0; i < mNavView.getMenu().size(); i++) {
+            MenuItem oneOfAllMenuTitles = mNavView.getMenu().getItem(i);
+            if (oneOfAllMenuTitles.getTitle() != selectedItem.getTitle() && oneOfAllMenuTitles.isChecked()) {
+                oneOfAllMenuTitles.setChecked(false);
+            }
+        }
+
+    }
+
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main_menu, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+
+        //TODO: add custom booster logo as menu item.
+        if (item.getTitle().equals(getString(R.string.menu_title))) {
+            mDrawerLayout.openDrawer(Gravity.LEFT);
+        }
         return true;
     }
 }

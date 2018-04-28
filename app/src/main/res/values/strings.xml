@@ -5,6 +5,7 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="menu_icon_title">main_menu_icon_title</string>
+    <string name="booster_menu_logo_title">booster_menu_logo_title</string>
     <string name="main_menu_text">This app helps you find out what type of investor you are. Use the menu
     to access the features. This app consists of information about the Booster Kiwisaver Investment Fund and a risk questionnaire which allows you to calculate which fund suits you.</string>
     <string name="investor_types_header">Investor Types</string>
@@ -14,4 +15,5 @@
     <string name="balanced_growth_title">Balanced Growth</string>
     <string name="growth_title">Growth</string>
     <string name="aggressive_growth_title">Aggressive Growth</string>
+
 </resources>
