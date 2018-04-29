@@ -4,5 +4,21 @@
     android:layout_height="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
+<TextView
+    android:id="@+id/investor_type_frag_title"
+    android:layout_width="wrap_content"
+    android:text="title"
+    android:layout_height="wrap_content" />
 
+    <ImageView
+        android:id="@+id/investor_type_pie_graph"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center_horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/investor_type_description"
+        android:text="This is sample investor type description text. Hopefully the text will wrap correctly as you would expect"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 </LinearLayout>

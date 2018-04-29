@@ -10,6 +10,7 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
@@ -19,6 +20,8 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 import java.util.List;
 
 import butterknife.BindView;
@@ -27,6 +30,8 @@ import project.matthew.booster.R;
 import project.matthew.booster.UI.Adapters.NavigationDrawerListAdapter;
 import project.matthew.booster.UI.Interfaces.ToolbarSetupInterface;
 import project.matthew.booster.UI.Interfaces.NavigationSetupInterface;
+
+import static android.view.View.GONE;
 
 /**
  * Created by Matthew on 27/04/2018.
@@ -38,8 +43,12 @@ public class MainActivity extends AppCompatActivity implements ToolbarSetupInter
     @BindView(R.id.nav_drawer_layout)
     DrawerLayout mDrawerLayout;
 
-  //  @BindView(R.id.toolbar)
-   // android.support.v7.widget.Toolbar mToolbar;
+    @BindView(R.id.main_info_text)
+    TextView mainInfoText;
+
+
+
+    private Toolbar mToolbar;
 
     private NavigationDrawerListAdapter mNavDrawerAdapter;
     private ListView mNavigationDrawerList;
@@ -57,7 +66,7 @@ public class MainActivity extends AppCompatActivity implements ToolbarSetupInter
        // initToolbar();
         hideToolbarTitle();
         setupNavigationDrawer();
-
+        //showIntroFragment();
     }
 
     @Override
@@ -110,6 +119,7 @@ public class MainActivity extends AppCompatActivity implements ToolbarSetupInter
         mNavigationDrawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                mainInfoText.setVisibility(GONE); // Hide the main app info text.
                 TextView navItemTextView = (TextView)view.findViewById(R.id.nav_title);
                 if (navItemTextView != null) {
                     String navItemTitle = (String) navItemTextView.getText();
@@ -134,6 +144,7 @@ public class MainActivity extends AppCompatActivity implements ToolbarSetupInter
                 // Remove the current fragment
                 if (mCurrentFragment != null) {
                     if (mCurrentFragment instanceof Fragment) {
+                        Log.d(TAG, "showFragment: removing fragment instance of: " + mCurrentFragment);
                         FragmentManager fragmentManager = getSupportFragmentManager();
                         fragmentManager.beginTransaction()
                                 .remove((Fragment) mCurrentFragment)
@@ -171,7 +182,6 @@ public class MainActivity extends AppCompatActivity implements ToolbarSetupInter
         });
         mDrawerLayout.addDrawerListener(mActionBarDrawerToggle);
     }
-
 
 
 
