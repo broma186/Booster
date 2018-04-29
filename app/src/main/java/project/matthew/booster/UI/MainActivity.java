@@ -10,6 +10,7 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -37,8 +38,8 @@ public class MainActivity extends AppCompatActivity implements ToolbarSetupInter
     @BindView(R.id.nav_drawer_layout)
     DrawerLayout mDrawerLayout;
 
-    @BindView(R.id.toolbar)
-    android.support.v7.widget.Toolbar mToolbar;
+  //  @BindView(R.id.toolbar)
+   // android.support.v7.widget.Toolbar mToolbar;
 
     private NavigationDrawerListAdapter mNavDrawerAdapter;
     private ListView mNavigationDrawerList;
@@ -53,15 +54,33 @@ public class MainActivity extends AppCompatActivity implements ToolbarSetupInter
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
-        initToolbar();
+       // initToolbar();
         hideToolbarTitle();
         setupNavigationDrawer();
 
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getTitle().equals(getString(R.string.menu_title))) {
+            if (!mDrawerLayout.isDrawerOpen(Gravity.START)) {
+                mDrawerLayout.openDrawer(Gravity.START);
+            } else {
+                mDrawerLayout.closeDrawer(Gravity.START);
+            }
+        }
+        return true;
+    }
+
+    @Override
     public void initToolbar() {
-        setSupportActionBar(mToolbar);
+       // setSupportActionBar(mToolbar);
     }
 
     @Override
@@ -76,7 +95,7 @@ public class MainActivity extends AppCompatActivity implements ToolbarSetupInter
         mNavigationDrawerList.setAdapter(mNavDrawerAdapter);
 
         mActionBarDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,
-                mToolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close) {
+                null, R.string.navigation_drawer_open, R.string.navigation_drawer_close) {
             @Override
             public void onDrawerClosed(View drawerView) {
                 super.onDrawerClosed(drawerView);
@@ -96,28 +115,19 @@ public class MainActivity extends AppCompatActivity implements ToolbarSetupInter
                     String navItemTitle = (String) navItemTextView.getText();
                     switch (navItemTitle) {
                         case "Investor Types":
-                           // showFragment();
-                            break;
-                        case "Defensive":
-                            break;
-                        case "Conservative":
-                            break;
-                        case "Balanced":
-                            break;
-                        case "Balanced Growth":
-                            break;
-                        case "Growth":
-                            break;
-                        case "Aggressive Growth":
+                           // Do nothing
                             break;
                         case "Questionnaire":
                             break;
                         case "Submit":
+                            showFragment(position, new SubmissionFragment(), navItemTitle);
                             break;
+                            default:
+                                showFragment(position, new InvestorTypeFragment(), navItemTitle);
                     }
                 }
             }
-            private void showFragment(int position, Object fragment) {
+            private void showFragment(int position, Object fragment, String fragmentTag) {
                 mSelectedNavDrawerPosition = position;
                 mDrawerLayout.closeDrawer(GravityCompat.START);
 
@@ -137,7 +147,7 @@ public class MainActivity extends AppCompatActivity implements ToolbarSetupInter
                     if (fragment instanceof Fragment) {
                         FragmentManager fragmentManager = getSupportFragmentManager();
                         fragmentManager.beginTransaction()
-                                .replace(R.id.container, (Fragment) fragment)
+                                .replace(R.id.container, (Fragment) fragment, fragmentTag)
                                 .commitAllowingStateLoss();
                     }
                     mCurrentFragment = fragment;
@@ -159,22 +169,10 @@ public class MainActivity extends AppCompatActivity implements ToolbarSetupInter
                 }
             }
         });
+        mDrawerLayout.addDrawerListener(mActionBarDrawerToggle);
     }
 
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main_menu, menu);
-        return true;
-    }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
 
-        //TODO: add custom booster logo as menu item.
-        if (item.getTitle().equals(getString(R.string.menu_title))) {
-            mDrawerLayout.openDrawer(Gravity.LEFT);
-        }
-        return true;
-    }
 }

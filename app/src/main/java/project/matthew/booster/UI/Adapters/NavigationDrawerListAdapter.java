@@ -63,9 +63,9 @@ public class NavigationDrawerListAdapter extends ArrayAdapter<String> {
 
         // tint the icon white or grey based on selected state
         if (selected) {
-            tvTitle.setTextColor(getContext().getResources().getColor(R.color.white));
+            tvTitle.setTextColor(getContext().getResources().getColor(R.color.colorAccent));
         } else {
-            tvTitle.setTextColor(getContext().getResources().getColor(R.color.colorPrimary));
+            tvTitle.setTextColor(getContext().getResources().getColor(R.color.white));
         }
         return convertView;
     }
