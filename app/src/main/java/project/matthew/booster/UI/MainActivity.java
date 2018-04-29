@@ -11,11 +11,13 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.transitions.everywhere.TransitionManager;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -119,6 +121,7 @@ public class MainActivity extends AppCompatActivity implements ToolbarSetupInter
         mNavigationDrawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                TransitionManager.beginDelayedTransition((ViewGroup) adapterView.getRootView());
                 mainInfoText.setVisibility(GONE); // Hide the main app info text.
                 TextView navItemTextView = (TextView)view.findViewById(R.id.nav_title);
                 if (navItemTextView != null) {
