@@ -144,7 +144,6 @@ public class MainActivity extends AppCompatActivity implements ToolbarSetupInter
                 // Remove the current fragment
                 if (mCurrentFragment != null) {
                     if (mCurrentFragment instanceof Fragment) {
-                        Log.d(TAG, "showFragment: removing fragment instance of: " + mCurrentFragment);
                         FragmentManager fragmentManager = getSupportFragmentManager();
                         fragmentManager.beginTransaction()
                                 .remove((Fragment) mCurrentFragment)

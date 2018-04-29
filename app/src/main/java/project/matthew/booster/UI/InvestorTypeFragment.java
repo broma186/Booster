@@ -12,12 +12,13 @@ import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import project.matthew.booster.R;
+import project.matthew.booster.UI.Interfaces.InvestorTypeInterface;
 
 /**
  * Created by Matthew on 29/04/2018.
  */
 
-public class InvestorTypeFragment extends Fragment {
+public class InvestorTypeFragment extends Fragment implements InvestorTypeInterface{
 
     private View rootView;
     private String mInvestorType;
@@ -35,7 +36,31 @@ public class InvestorTypeFragment extends Fragment {
         rootView = inflater.inflate(R.layout.investor_type_fragment, container, false);
         ButterKnife.bind(rootView);
         mInvestorType = getTag();
+
+        setPieGraphAndText();
+
         return rootView;
+    }
+
+    @Override
+    public void setPieGraphAndText() {
+        switch(mInvestorType) {
+            case "Defensive":
+                // TODO: Assign appropriately.
+               // investorTypePieGraphView.setImageResource(R.drawable.booster_logo);
+               // investorTypeDescription.setText();
+                break;
+            case "Conservative":
+                break;
+            case "Balanced":
+                break;
+            case "Balanced Growth":
+                break;
+            case "Growth":
+                break;
+            case "Aggressive Growth":
+                break;
+        }
     }
 }
 
