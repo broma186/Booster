@@ -15,5 +15,19 @@
     <string name="balanced_growth_title">Balanced Growth</string>
     <string name="growth_title">Growth</string>
     <string name="aggressive_growth_title">Aggressive Growth</string>
-
+<string name="capital_guarantee_fund">The fund aims to provide relatively consistent returns, subject to a capital guarantee.
+It aims to achieve returns – after fees but before tax – of at least 1.5% per year above inflation over any 2-year period.
+Generally, there may be small movements up and down in the value of the fund.</string>
+<string name="default_saver_fund">The fund aims to provide relatively consistent but modest returns, with some capital gains over the long term.
+It aims to achieve achieve returns – after fees but before tax – of at least 2.0% per year above inflation over any 3-year period.
+Generally, there will be small movements up and down in the value of the fund, reflecting its temporary holding nature.</string>
+    <string name="balanced_fund">The fund aims to provide an enhanced return over the long term through capital gains.
+It aims to achieve returns – after fees but before tax – of at least 3% per year above inflation over any 5-year period.
+There will be some movements up and down in the value of the fund.</string>
+    <string name="balanced_growth_fund">The fund aims to provide long-term capital gains but to partially offset short-term movements up and down with some income assets.
+It aims to achieve returns – after fees but before tax – of at least 4% per year above inflation over any 7-year period.
+There will be larger movements up and down in the value of the fund compared to the Balanced Fund.</string>
+    <string name="high_growth_fund">The fund aims to maximise the potential for capital gains over the long term.
+It aims to achieve returns – after fees but before tax – of at least 5% per year above inflation over any 10-year period.
+There will be significant movements up and down in the value of the fund.</string>
 </resources>

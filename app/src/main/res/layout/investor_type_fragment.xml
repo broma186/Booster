@@ -2,16 +2,24 @@
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
 <TextView
     android:id="@+id/investor_type_frag_title"
     android:layout_width="wrap_content"
+    android:layout_gravity="center_horizontal"
+    android:gravity="center_horizontal"
+    android:layout_marginTop="10dp"
+    android:textSize="25dp"
+    android:fontFamily="@font/circular_book_bold"
+    android:textColor="@color/white"
     android:text="title"
     android:layout_height="wrap_content" />
 
     <ImageView
         android:id="@+id/investor_type_pie_graph"
+        android:layout_marginTop="10dp"
         android:layout_gravity="center_horizontal"
         android:gravity="center_horizontal"
         android:layout_width="wrap_content"
@@ -19,6 +27,12 @@
     <TextView
         android:id="@+id/investor_type_description"
         android:text="This is sample investor type description text. Hopefully the text will wrap correctly as you would expect"
+        android:textSize="16dp"
+        android:fontFamily="@font/circular_book"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/white"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 </LinearLayout>
