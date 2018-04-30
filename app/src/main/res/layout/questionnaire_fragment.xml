@@ -18,7 +18,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:onClick="radio"
-            android:text="@string/ticketRadio"
+
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textSize="25dp" />
 
@@ -28,7 +28,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:onClick="radio"
-            android:text="@string/warningRadio"
+
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textSize="25dp" />
 
