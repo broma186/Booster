@@ -30,4 +30,46 @@ There will be larger movements up and down in the value of the fund compared to 
     <string name="high_growth_fund">The fund aims to maximise the potential for capital gains over the long term.
 It aims to achieve returns – after fees but before tax – of at least 5% per year above inflation over any 10-year period.
 There will be significant movements up and down in the value of the fund.</string>
+    <string name="question_one">When do you plan to make a signiicant lump sum withdrawal from your portfolio, for example, for the purchase of a irst home
+or for retirement needs? (From age 65 at the earliest)</string>
+    <string name="question_one_answer_one">Within 2 years – you need a DEFENSIVE TYPE fund</string>
+    <string name="question_one_answer_two">In 2 to 5 years – you need a CONSERVATIVE TYPE fund </string>
+    <string name="question_one_answer_three">In 6 to 10 years – continue to next question</string>
+    <string name="question_one_answer_four">In 11 to 20 years – continue to next question </string>
+    <string name="question_one_answer_five">More than 20 years – continue to next question</string>
+
+
+    <string name="question_two">Which of the following questions best describes your thoughts about risks and returns?</string>
+    <string name="question_two_answer_one">I want to minimise my risk and am therefore willing to
+accept low returns</string>
+    <string name="question_two_answer_two">I am willing to take a moderate amount of risk to
+generate low to medium returns</string>
+    <string name="question_two_answer_three">I am willing to take a reasonable amount of risk to
+provide a more medium return </string>
+    <string name="question_two_answer_four">In order to receive higher returns, I am willing to take a
+relatively high amount of risk</string>
+    <string name="question_two_answer_five">I want to maximise my returns and am willing to accept a
+high level of risk</string>
+
+    <string name="question_three">Protecting my investment portfolio from a fall in value at any time is more important to me than achieving high returns?</string>
+    <string name="question_three_answer_one">Strongly Agree</string>
+    <string name="question_three_answer_two">Agree</string>
+    <string name="question_three_answer_three">Neither agree or disagree</string>
+    <string name="question_three_answer_four">Disagree</string>
+    <string name="question_three_answer_five">Strongly Disagree</string>
+
+    <string name="question_four">Consider you have an investment balance of at least $20,000 or more. If after a short period of time (less than 1 year) your
+balance has dropped in value, which statement relects best how you would feel about this?</string>
+    <string name="question_four_answer_one">I would be unhappy with any drop in value</string>
+    <string name="question_four_answer_two">I would be OK with a drop in value of no more than 5%</string>
+    <string name="question_four_answer_three">I would be OK with a drop in value of no more than 10%</string>
+    <string name="question_four_answer_four">I would be OK with a drop in value of up to 15%</string>
+    <string name="question_four_answer_five">I would be OK with a drop in value of up to 20%</string>
+
+    <string name="question_five">How often would you tend to worry about your investment returns?</string>
+    <string name="question_five_answer_one">Daily</string>
+    <string name="question_five_answer_two">Monthly</string>
+    <string name="question_five_answer_three">Quarterly</string>
+    <string name="question_five_answer_four">Annually</string>
+    <string name="question_five_answer_five">Never or only occasionally over the longer term</string>
 </resources>
