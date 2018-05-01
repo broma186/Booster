@@ -131,6 +131,7 @@ public class MainActivity extends AppCompatActivity implements ToolbarSetupInter
                            // Do nothing
                             break;
                         case "Questionnaire":
+                            showFragment(position, new QuestionnaireFragment(), navItemTitle);
                             break;
                         case "Submit":
                             showFragment(position, new SubmissionFragment(), navItemTitle);

@@ -1,22 +1,45 @@
 package project.matthew.booster.UI.Models;
 
+import org.simpleframework.xml.Attribute;
+import org.simpleframework.xml.Root;
+
+import io.realm.RealmList;
+import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
+
 /**
  * Created by Matthew on 30/04/2018.
  */
 
-public class Question {
+@Root(name = "row", strict = false)
 
+public class Question extends RealmObject {
+    @PrimaryKey
+    @Attribute(name = "id")
     private int id;
-    private String title;
-    private Answer[] answers;
 
-    public Question(int id, String title, Answer[] answers) {
+    @Attribute(name = "title")
+    private String title;
+
+    private RealmList<Answer> answers;
+
+    public Question() {}
+
+    public Question(int id, String title, RealmList<Answer> answers) {
         this.id = id;
         this.title = title;
         this.answers = answers;
     }
 
-    public Answer[] getAnswers() {
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setAnswers(RealmList<Answer> answers) {
+        this.answers = answers;
+    }
+
+    public RealmList<Answer> getAnswers() {
         return answers;
     }
 

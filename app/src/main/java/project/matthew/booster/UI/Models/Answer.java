@@ -1,13 +1,26 @@
 package project.matthew.booster.UI.Models;
 
+import org.simpleframework.xml.Attribute;
+
+import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
+
 /**
  * Created by Matthew on 30/04/2018.
  */
 
-public class Answer {
+public class Answer extends RealmObject {
+    @PrimaryKey
+    @Attribute(name = "id")
+    private int id;
 
-    private int id, value;
+    @Attribute(name = "value")
+    private int value;
+
+    @Attribute(name = "name")
     private String name;
+
+    public Answer() {}
 
     public Answer(int id, int value, String name) {
         this.id = id;
@@ -21,5 +34,9 @@ public class Answer {
 
     public String getName() {
         return name;
+    }
+
+    public int getId() {
+        return id;
     }
 }
