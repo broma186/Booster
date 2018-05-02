@@ -20,11 +20,22 @@ public class Answer extends RealmObject {
     @Attribute(name = "name")
     private String name;
 
+    @Attribute(name = "isSelected")
+    private boolean isSelected;
+
     public Answer() {}
 
     public Answer(int id, int value, String name) {
         this.id = id;
         this.value = value;
+        this.name = name;
+    }
+
+    public void setValue(int value) {
+        this.value = value;
+    }
+
+    public void setName(String name) {
         this.name = name;
     }
 
@@ -38,5 +49,13 @@ public class Answer extends RealmObject {
 
     public int getId() {
         return id;
+    }
+
+    public boolean isSelected() {
+        return isSelected;
+    }
+
+    public void setSelected(boolean selected) {
+        isSelected = selected;
     }
 }

@@ -11,11 +11,13 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -34,6 +36,7 @@ import project.matthew.booster.UI.Models.Question;
 public class QuestionnaireFragment extends Fragment {
 
     private View rootView;
+    private ArrayList<RadioGroup> answerSelections;
 
     @BindView(R.id.questionnaire_layout)
     LinearLayout questionnaireLayout;
@@ -41,6 +44,7 @@ public class QuestionnaireFragment extends Fragment {
     private Typeface mFont;
 
     List<Question> questions;
+
     private static final String TAG = "QuestionnaireFragment";
     @Nullable
     @Override
@@ -48,6 +52,7 @@ public class QuestionnaireFragment extends Fragment {
         rootView = inflater.inflate(R.layout.questionnaire_fragment, container, false);
         ButterKnife.bind(this, rootView);
 
+        answerSelections = new ArrayList<RadioGroup>();
 
         mFont = Typeface.createFromAsset(getActivity().getAssets(),"circular_book.ttf");
 
@@ -55,33 +60,60 @@ public class QuestionnaireFragment extends Fragment {
         Realm realm = Realm.getDefaultInstance();
         RealmResults<Question> questionsFromRealm = realm.where(Question.class).findAll();
         questions = realm.copyFromRealm(questionsFromRealm);
-        Log.d(TAG, "onCreateView: size of questions: " + questions.size());
 
         if (questions != null & questions.size() > 0) {
             for (Question question : questions) {
                 TextView questionView = new TextView(getActivity());
                 questionView.setText(question.getTitle());
-                questionView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+                LinearLayout.LayoutParams vglp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                vglp.setMargins(10, 20, 10, 20);
+                questionView.setLayoutParams(vglp);
                 questionView.setTypeface(mFont);
+                questionView.setTextSize(18);
+                questionView.setTextColor(getResources().getColor(R.color.white));
                 questionView.setGravity(Gravity.CENTER_HORIZONTAL);
                 questionnaireLayout.addView(questionView);
 
-                if (question.getAnswers() != null && question.getAnswers().size() > 0) {
+                RealmResults<Answer> answersFromRealm = realm.where(Answer.class).findAll();
+                List<Answer> answers = realm.copyFromRealm(answersFromRealm);
+
+                if (answers != null && answers.size() > 0) {
                     RadioGroup answerGroup = new RadioGroup(getActivity());
                     answerGroup.setId(question.getId());
-                    answerGroup.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-                    answerGroup.setGravity(Gravity.CENTER_HORIZONTAL);
-                    for (Answer answer : question.getAnswers()) {
-                        RadioButton answerOption = new RadioButton(getActivity());
+                    LinearLayout.LayoutParams aglp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                    aglp.setMargins(10, 20, 10, 20);
+                    answerGroup.setLayoutParams(aglp);
+                    answerGroup.setGravity(Gravity.LEFT);
+                    for (final Answer answer : answers) {
+                        final RadioButton answerOption = new RadioButton(getActivity());
                         answerOption.setId(answer.getId());
                         answerOption.setText(answer.getName());
-                        questionView.setTypeface(mFont);
+                        answerOption.setTypeface(mFont);
+                        questionView.setTextSize(15);
+                        LinearLayout.LayoutParams rblp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                        rblp.setMargins(20, 10, 20, 10);
+                        answerOption.setLayoutParams(rblp);
+                        answerOption.setTextColor(getResources().getColor(R.color.white));
                         answerOption.setContentDescription(String.valueOf(answer.getValue()));
+                        answerOption.setChecked(answer.isSelected());
+                        answerOption.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                            @Override
+                            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                                // Store value of selection against answer db object.
+                                Realm realm = Realm.getDefaultInstance();
+                                realm.beginTransaction();
+                                answer.setSelected(isChecked);
+                                realm.insertOrUpdate(answer);
+                                realm.commitTransaction();
+                                realm.close();
+                            }
+                        });
                         answerGroup.addView(answerOption);
                     }
+                    questionnaireLayout.addView(answerGroup);
+                    answerSelections.add(answerGroup);
                 }
-
-
+                ((MainActivity) getActivity()).setAnswerOptions(answerSelections);
             }
         }
         return rootView;

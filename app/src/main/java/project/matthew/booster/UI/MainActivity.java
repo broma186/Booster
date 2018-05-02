@@ -20,16 +20,20 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import org.w3c.dom.Text;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import project.matthew.booster.R;
 import project.matthew.booster.UI.Adapters.NavigationDrawerListAdapter;
+import project.matthew.booster.UI.Interfaces.RadioButtonStorageInterface;
 import project.matthew.booster.UI.Interfaces.ToolbarSetupInterface;
 import project.matthew.booster.UI.Interfaces.NavigationSetupInterface;
 
@@ -39,7 +43,7 @@ import static android.view.View.GONE;
  * Created by Matthew on 27/04/2018.
  */
 
-public class MainActivity extends AppCompatActivity implements ToolbarSetupInterface, NavigationSetupInterface {
+public class MainActivity extends AppCompatActivity implements ToolbarSetupInterface, NavigationSetupInterface, RadioButtonStorageInterface {
     private static final String TAG = "MainActivity";
 
     @BindView(R.id.nav_drawer_layout)
@@ -58,6 +62,8 @@ public class MainActivity extends AppCompatActivity implements ToolbarSetupInter
 
     private int mSelectedNavDrawerPosition;
     private Object mCurrentFragment;
+
+    private ArrayList<RadioGroup> answerOptions;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -165,21 +171,6 @@ public class MainActivity extends AppCompatActivity implements ToolbarSetupInter
                                 .commitAllowingStateLoss();
                     }
                     mCurrentFragment = fragment;
-                 /*   if (mCurrentFragment instanceof ParkingSelectionContainerFragment) {
-                        setTitle("Buy parking");
-                    } else if (mCurrentFragment instanceof CurrentParkingContainerFragment) {
-                        setTitle("Current parking");
-                    } else if (mCurrentFragment instanceof VehicleListFragment) {
-                        setTitle("My vehicles");
-                    } else if (mCurrentFragment instanceof TopupFragment) {
-                        setTitle("Top up");
-                    } else if (mCurrentFragment instanceof AboutFragment) {
-                        setTitle("About this app");
-                    } else if (mCurrentFragment instanceof OrganisationListFragment) {
-                        setTitle("Organisations");
-                    } else if (mCurrentFragment instanceof OccupancyFragment) {
-                        setTitle("Find a park");
-                    }*/
                 }
             }
         });
@@ -187,5 +178,18 @@ public class MainActivity extends AppCompatActivity implements ToolbarSetupInter
     }
 
 
+    @Override
+    public void setAnswerOptions(ArrayList<RadioGroup> answerOptions) {
+        this.answerOptions = answerOptions;
 
+        for (RadioGroup answerOption : answerOptions) {
+            //TODO: Iterate through all answers. for each that is selected, get the radio button id using the answer id (same)
+            //TODO: and mark that the current radiogroup has a selected item.
+        }
+    }
+
+    @Override
+    public ArrayList<RadioGroup> getAnswerOptions() {
+        return answerOptions;
+    }
 }

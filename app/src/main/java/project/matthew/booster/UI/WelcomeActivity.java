@@ -41,99 +41,82 @@ public class WelcomeActivity extends AppCompatActivity implements QuestionnaireL
 
     }
 
+    private void createAnswer(int id, int value, String name) {
+        Realm realm = Realm.getDefaultInstance();
+        realm.beginTransaction();
+        Answer answer = realm.createObject(Answer.class, id);
+        answer.setName(name);
+        answer.setValue(value);
+        realm.commitTransaction();
+        realm.close();
+    }
+
+    private void createQuestion(int id, String title, int start, int end) {
+        Realm realm = Realm.getDefaultInstance();
+        RealmResults<Answer> answersFromRealm = realm.where(Answer.class).findAll();
+
+        RealmList<Answer> answersToAddToQuestion = new RealmList<Answer>();
+
+        for (Answer answer : answersFromRealm) {
+            if (answer.getId() >= start && answer.getId() <= end) {
+                answersToAddToQuestion.add(answer);
+            }
+        }
+        realm.beginTransaction();
+        Question question = realm.createObject(Question.class, id);
+        question.setTitle(title);
+        question.setAnswers(answersToAddToQuestion);
+        realm.commitTransaction();
+        realm.close();
+    }
+
+    private static final String TAG = "WelcomeActivity";
     @Override
     public void loadQuestionsAndAnswers() {
         Resources res = getResources();
-
-
-
         Realm realm = Realm.getDefaultInstance();
         RealmResults<Question> questionsFromRealm = realm.where(Question.class).findAll();
 
         if (questionsFromRealm == null || questionsFromRealm.size() == 0) {
+            Log.d(TAG, "loadQuestionsAndAnswers: no questions");
+            createAnswer(1, 1, res.getString(R.string.question_one_answer_one));
+            createAnswer(2, 3, res.getString(R.string.question_one_answer_two));
+            createAnswer(3, 5, res.getString(R.string.question_one_answer_three));
+            createAnswer(4, 7, res.getString(R.string.question_one_answer_four));
+            createAnswer(5, 10, res.getString(R.string.question_one_answer_five));
 
-            Answer[] questionOneAnswers = {new Answer(1, 1, res.getString(R.string.question_one_answer_one)),
-                    new Answer(2, 3, res.getString(R.string.question_one_answer_two)),
-                    new Answer(3, 5, res.getString(R.string.question_one_answer_three)),
-                    new Answer(4, 7, res.getString(R.string.question_one_answer_four)),
-                    new Answer(5, 10, res.getString(R.string.question_one_answer_five))};
+            createAnswer(6, 1, res.getString(R.string.question_two_answer_one));
+            createAnswer(7, 3, res.getString(R.string.question_two_answer_two));
+            createAnswer(8, 5, res.getString(R.string.question_two_answer_three));
+            createAnswer(9, 7, res.getString(R.string.question_two_answer_four));
+            createAnswer(10, 10, res.getString(R.string.question_two_answer_five));
 
-            RealmList<Answer> q1Answers = new RealmList<Answer>();
-            for (Answer answer : questionOneAnswers) {
-                q1Answers.add(answer);
-            }
-            Question questionOne = new Question(1, res.getString(R.string.question_one), q1Answers);
+            createAnswer(11, 1, res.getString(R.string.question_three_answer_one));
+            createAnswer(12, 3, res.getString(R.string.question_three_answer_two));
+            createAnswer(13, 5, res.getString(R.string.question_three_answer_three));
+            createAnswer(14, 7, res.getString(R.string.question_three_answer_four));
+            createAnswer(15, 10, res.getString(R.string.question_three_answer_five));
 
-            Answer[] questionTwoAnswers = {new Answer(6, 1, res.getString(R.string.question_two_answer_one)),
-                    new Answer(7, 3, res.getString(R.string.question_two_answer_two)),
-                    new Answer(8, 5, res.getString(R.string.question_two_answer_three)),
-                    new Answer(9, 7, res.getString(R.string.question_two_answer_four)),
-                    new Answer(10, 10, res.getString(R.string.question_two_answer_five))};
+            createAnswer(16, 1, res.getString(R.string.question_four_answer_one));
+            createAnswer(17, 3, res.getString(R.string.question_four_answer_two));
+            createAnswer(18, 5, res.getString(R.string.question_four_answer_three));
+            createAnswer(19, 7, res.getString(R.string.question_four_answer_four));
+            createAnswer(20, 10, res.getString(R.string.question_four_answer_five));
 
-            RealmList<Answer> q2Answers = new RealmList<Answer>();
-            for (Answer answer : questionTwoAnswers) {
-                q2Answers.add(answer);
-            }
-            Question questionTwo = new Question(2, res.getString(R.string.question_two), q2Answers);
+            createAnswer(21, 1, res.getString(R.string.question_five_answer_one));
+            createAnswer(22, 3, res.getString(R.string.question_five_answer_two));
+            createAnswer(23, 5, res.getString(R.string.question_five_answer_three));
+            createAnswer(24, 7, res.getString(R.string.question_five_answer_four));
+            createAnswer(25, 10, res.getString(R.string.question_five_answer_five));
 
-
-            Answer[] questionThreeAnswers = {new Answer(11, 1, res.getString(R.string.question_three_answer_one)),
-                    new Answer(12, 3, res.getString(R.string.question_three_answer_two)),
-                    new Answer(13, 5, res.getString(R.string.question_three_answer_three)),
-                    new Answer(14, 7, res.getString(R.string.question_three_answer_four)),
-                    new Answer(15, 10, res.getString(R.string.question_three_answer_five))};
-
-            RealmList<Answer> q3Answers = new RealmList<Answer>();
-            for (Answer answer : questionThreeAnswers) {
-                q3Answers.add(answer);
-            }
-            Question questionThree = new Question(3, res.getString(R.string.question_three), q3Answers);
-
-            Answer[] questionFourAnswers = {new Answer(16, 1, res.getString(R.string.question_four_answer_one)),
-                    new Answer(17, 3, res.getString(R.string.question_four_answer_two)),
-                    new Answer(18, 5, res.getString(R.string.question_four_answer_three)),
-                    new Answer(19, 7, res.getString(R.string.question_four_answer_four)),
-                    new Answer(20, 10, res.getString(R.string.question_four_answer_five))};
-
-            RealmList<Answer> q4Answers = new RealmList<Answer>();
-            for (Answer answer : questionFourAnswers) {
-                q4Answers.add(answer);
-            }
-            Question questionFour = new Question(4, res.getString(R.string.question_four), q4Answers);
-
-            Answer[] questionFiveAnswers = {new Answer(21, 1, res.getString(R.string.question_five_answer_one)),
-                    new Answer(22, 3, res.getString(R.string.question_five_answer_two)),
-                    new Answer(23, 5, res.getString(R.string.question_five_answer_three)),
-                    new Answer(24, 7, res.getString(R.string.question_five_answer_four)),
-                    new Answer(25, 10, res.getString(R.string.question_five_answer_five))};
-
-            RealmList<Answer> q5Answers = new RealmList<Answer>();
-            for (Answer answer : questionFiveAnswers) {
-                q5Answers.add(answer);
-            }
-            Question questionFive = new Question(5, res.getString(R.string.question_five), q5Answers);
-
-            Question[] questionsArr = {questionOne, questionTwo, questionThree, questionFour, questionFive};
-            for (Question question : questionsArr) {
-                copyToRealm(question);
-            }
+            createQuestion(1, res.getString(R.string.question_one), 1, 5);
+            createQuestion(2, res.getString(R.string.question_two), 6, 10);
+            createQuestion(3, res.getString(R.string.question_three), 11, 15);
+            createQuestion(4, res.getString(R.string.question_four), 16, 20);
+            createQuestion(5, res.getString(R.string.question_five), 21, 25);
+        } else {
+            Log.d(TAG, "loadQuestionsAndAnswers: already questions");
         }
     }
 
-    private static final String TAG = "WelcomeActivity";
-    private void copyToRealm(Question question) {
-        Realm realm = Realm.getDefaultInstance();
-        if (!question.getAnswers().isManaged()) {
-            realm.beginTransaction();
-            realm.copyToRealm(question.getAnswers());
-            realm.commitTransaction();
-        }
-        realm.beginTransaction();
-        Question q1 = realm.createObject(Question.class, question.getId());
-        q1.setTitle(question.getTitle());
-        q1.setAnswers(question.getAnswers());
-        realm.commitTransaction();
-        realm.close();
-
-    }
 }
