@@ -4,6 +4,7 @@ package project.matthew.booster.UI;
 import android.content.res.AssetManager;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -62,7 +63,7 @@ public class QuestionnaireFragment extends Fragment {
         questions = realm.copyFromRealm(questionsFromRealm);
 
         if (questions != null & questions.size() > 0) {
-            for (Question question : questions) {
+            for (final Question question : questions) {
                 TextView questionView = new TextView(getActivity());
                 questionView.setText(question.getTitle());
                 LinearLayout.LayoutParams vglp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -75,15 +76,46 @@ public class QuestionnaireFragment extends Fragment {
                 questionnaireLayout.addView(questionView);
 
                 RealmResults<Answer> answersFromRealm = realm.where(Answer.class).findAll();
-                List<Answer> answers = realm.copyFromRealm(answersFromRealm);
+                final List<Answer> answers = realm.copyFromRealm(answersFromRealm);
 
                 if (answers != null && answers.size() > 0) {
-                    RadioGroup answerGroup = new RadioGroup(getActivity());
+                    final RadioGroup answerGroup = new RadioGroup(getActivity());
                     answerGroup.setId(question.getId());
                     LinearLayout.LayoutParams aglp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
                     aglp.setMargins(10, 20, 10, 20);
                     answerGroup.setLayoutParams(aglp);
                     answerGroup.setGravity(Gravity.LEFT);
+
+                    answerGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+                        @Override
+                        public void onCheckedChanged(RadioGroup radioGroup, int checkedId) {
+
+                            Realm realm = Realm.getDefaultInstance();
+                            for (Answer answer : answers) {
+                                if (answer.getId() == checkedId) {
+                                    Log.d("MainActivity", "onCheckedChanged: updating answer with id: " + answer.getId());
+                                    realm.beginTransaction();
+                                    answer.setSelected(true);
+                                    realm.insertOrUpdate(answer);
+                                    realm.commitTransaction();
+                                } else {
+                                    realm.beginTransaction();
+                                    answer.setSelected(false);
+                                    realm.insertOrUpdate(answer);
+                                    realm.commitTransaction();
+                                }
+                            }
+                            realm.beginTransaction();
+                            Log.d("MainActivity", "onCheckedChanged: updating question with id: " + question.getId());
+                            question.setAnswered(new Boolean(true));
+                            realm.insertOrUpdate(question);
+                            realm.commitTransaction();
+
+                            realm.close();
+                            Log.d("MainActivity", "onCreateView: check done on radio select");
+                            ((MainActivity) getActivity()).checkDone();
+                        }
+                    });
                     for (final Answer answer : answers) {
                         final RadioButton answerOption = new RadioButton(getActivity());
                         answerOption.setId(answer.getId());
@@ -96,25 +128,15 @@ public class QuestionnaireFragment extends Fragment {
                         answerOption.setTextColor(getResources().getColor(R.color.white));
                         answerOption.setContentDescription(String.valueOf(answer.getValue()));
                         answerOption.setChecked(answer.isSelected());
-                        answerOption.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                            @Override
-                            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
-                                // Store value of selection against answer db object.
-                                Realm realm = Realm.getDefaultInstance();
-                                realm.beginTransaction();
-                                answer.setSelected(isChecked);
-                                realm.insertOrUpdate(answer);
-                                realm.commitTransaction();
-                                realm.close();
-                            }
-                        });
+
                         answerGroup.addView(answerOption);
                     }
                     questionnaireLayout.addView(answerGroup);
                     answerSelections.add(answerGroup);
                 }
-                ((MainActivity) getActivity()).setAnswerOptions(answerSelections);
             }
+            Log.d("MainActivity", "onCreateView: check done on layout");
+            ((MainActivity) getActivity()).checkDone();
         }
         return rootView;
     }

@@ -9,7 +9,7 @@ import java.util.ArrayList;
  * Created by Matthew on 2/05/2018.
  */
 
-public interface RadioButtonStorageInterface {
-    public void setAnswerOptions(ArrayList<RadioGroup> answerOptions);
-    public ArrayList<RadioGroup> getAnswerOptions();
+public interface QuestionnaireCompletionInterface {
+    public void checkDone();
+    public void setScore();
 }

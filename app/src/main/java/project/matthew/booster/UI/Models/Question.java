@@ -21,6 +21,9 @@ public class Question extends RealmObject {
     @Attribute(name = "title")
     private String title;
 
+    @Attribute(name = "isAnswered")
+    private Boolean isAnswered;
+
     private RealmList<Answer> answers;
 
     public Question() {}
@@ -30,6 +33,7 @@ public class Question extends RealmObject {
         this.title = title;
         this.answers = answers;
     }
+
 
     public void setTitle(String title) {
         this.title = title;
@@ -49,5 +53,13 @@ public class Question extends RealmObject {
 
     public int getId() {
         return id;
+    }
+
+    public Boolean isAnswered() {
+        return isAnswered;
+    }
+
+    public void setAnswered(Boolean answered) {
+        isAnswered = answered;
     }
 }
