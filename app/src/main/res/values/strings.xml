@@ -72,4 +72,6 @@ balance has dropped in value, which statement relects best how you would feel ab
     <string name="question_five_answer_three">Quarterly</string>
     <string name="question_five_answer_four">Annually</string>
     <string name="question_five_answer_five">Never or only occasionally over the longer term</string>
+
+    <string name="total_score_pre">Your total score is:</string>
 </resources>

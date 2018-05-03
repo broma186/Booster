@@ -10,6 +10,6 @@ import java.util.ArrayList;
  */
 
 public interface QuestionnaireCompletionInterface {
-    public void checkDone();
+    public boolean checkDone();
     public void setScore();
 }

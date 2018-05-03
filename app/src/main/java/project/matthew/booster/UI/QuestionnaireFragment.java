@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -23,6 +24,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import io.realm.Realm;
 import io.realm.RealmResults;
 import project.matthew.booster.R;
@@ -41,6 +43,26 @@ public class QuestionnaireFragment extends Fragment {
 
     @BindView(R.id.questionnaire_layout)
     LinearLayout questionnaireLayout;
+
+    @BindView(R.id.submit_button)
+    TextView submitButton;
+
+    @OnClick(R.id.submit_button)
+    public void goToResultScreen(View view) {
+        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+
+        // Remove questionnaire fragment.
+        fragmentManager.beginTransaction()
+                .remove((Fragment) this)
+                .commitAllowingStateLoss();
+
+        // Replace with questionnaire fragment.
+        ResultFragment resFrag = new ResultFragment();
+        fragmentManager.beginTransaction()
+                .replace(R.id.container, (Fragment) resFrag, "RESULT")
+                .commitAllowingStateLoss();
+
+    }
 
     private Typeface mFont;
 
@@ -109,8 +131,10 @@ public class QuestionnaireFragment extends Fragment {
                             realm.commitTransaction();
 
                             realm.close();
-                            Log.d("MainActivity", "onCreateView: check done on radio select");
-                            ((MainActivity) getActivity()).checkDone();
+
+                            if (((MainActivity) getActivity()).checkDone() && submitButton.getVisibility() != View.VISIBLE) {
+                                submitButton.setVisibility(View.VISIBLE);
+                            }
                         }
                     });
                     for (final Answer answer : question.getAnswers()) {
@@ -132,8 +156,9 @@ public class QuestionnaireFragment extends Fragment {
                     answerSelections.add(answerGroup);
                 }
             }
-            Log.d("MainActivity", "onCreateView: check done on layout");
-            ((MainActivity) getActivity()).checkDone();
+            if (((MainActivity) getActivity()).checkDone() && submitButton.getVisibility() != View.VISIBLE) {
+                submitButton.setVisibility(View.VISIBLE);
+            }
         }
         return rootView;
     }

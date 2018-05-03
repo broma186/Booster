@@ -147,7 +147,7 @@ public class MainActivity extends AppCompatActivity implements ToolbarSetupInter
                     }
                 }
             }
-            private void showFragment(int position, Object fragment, String fragmentTag) {
+            public void showFragment(int position, Object fragment, String fragmentTag) {
                 mDrawerLayout.closeDrawer(GravityCompat.START);
 
                 // Remove the current fragment
@@ -182,21 +182,9 @@ public class MainActivity extends AppCompatActivity implements ToolbarSetupInter
     }
 
     @Override
-    public void checkDone() {
+    public boolean checkDone() {
         Realm realm = Realm.getDefaultInstance();
-        RealmResults<Question> questionsFromRealm = realm.where(Question.class).findAll();
-        Log.d(TAG, "checkDone: num of questions from realm: " + questionsFromRealm.size());
-        RealmResults<Question> answeredQuestions = realm.where(Question.class).equalTo("isAnswered", true).findAll();
 
-
-        Log.d(TAG, "checkDone: num of ans questions from realm: "+ answeredQuestions.size());
-        if (questionsFromRealm.size() == answeredQuestions.size()) {
-            Log.d(TAG, "checkDone: will be ready to submit");
-            Log.d(TAG, "checkDone: notified adapter of changes.");
-            mNavDrawerAdapter.setReadyToSubmit(true);
-            mNavDrawerAdapter.notifyDataSetChanged();
-
-        }
 
         RealmResults<Answer> answersFromRealm = realm.where(Answer.class).findAll();
         final List<Answer> answers = realm.copyFromRealm(answersFromRealm);
@@ -209,5 +197,25 @@ public class MainActivity extends AppCompatActivity implements ToolbarSetupInter
         score = tempScore;
         Log.d(TAG, "checkDone: total score is: " + tempScore);
 
+        RealmResults<Question> questionsFromRealm = realm.where(Question.class).findAll();
+        Log.d(TAG, "checkDone: num of questions from realm: " + questionsFromRealm.size());
+        RealmResults<Question> answeredQuestions = realm.where(Question.class).equalTo("isAnswered", true).findAll();
+
+
+        Log.d(TAG, "checkDone: num of ans questions from realm: "+ answeredQuestions.size());
+        if (questionsFromRealm.size() == answeredQuestions.size()) {
+            Log.d(TAG, "checkDone: will be ready to submit");
+            Log.d(TAG, "checkDone: notified adapter of changes.");
+            mNavDrawerAdapter.setReadyToSubmit(true);
+            mNavDrawerAdapter.notifyDataSetChanged();
+            return true;
+        } else {
+            return false;
+        }
     }
+
+    public int getScore() {
+        return score;
+    }
+
 }

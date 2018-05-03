@@ -8,5 +8,20 @@
         android:layout_height="match_parent"
         android:layout_width="match_parent"
         android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/submit_button"
+            android:background="@android:color/holo_green_light"
+            android:text="SUBMIT"
+            android:fontFamily="@font/circular_book_bold"
+            android:textSize="25dp"
+            android:visibility="gone"
+            android:textColor="@color/white"
+            android:textAlignment="center"
+            android:layout_gravity="bottom"
+            android:gravity="bottom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
     </LinearLayout>
+
 </ScrollView>
