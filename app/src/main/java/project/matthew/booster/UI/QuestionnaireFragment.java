@@ -75,10 +75,7 @@ public class QuestionnaireFragment extends Fragment {
                 questionView.setGravity(Gravity.CENTER_HORIZONTAL);
                 questionnaireLayout.addView(questionView);
 
-                RealmResults<Answer> answersFromRealm = realm.where(Answer.class).findAll();
-                final List<Answer> answers = realm.copyFromRealm(answersFromRealm);
-
-                if (answers != null && answers.size() > 0) {
+                if (question.getAnswers() != null && question.getAnswers().size() > 0) {
                     final RadioGroup answerGroup = new RadioGroup(getActivity());
                     answerGroup.setId(question.getId());
                     LinearLayout.LayoutParams aglp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -91,7 +88,7 @@ public class QuestionnaireFragment extends Fragment {
                         public void onCheckedChanged(RadioGroup radioGroup, int checkedId) {
 
                             Realm realm = Realm.getDefaultInstance();
-                            for (Answer answer : answers) {
+                            for (Answer answer : question.getAnswers()) {
                                 if (answer.getId() == checkedId) {
                                     Log.d("MainActivity", "onCheckedChanged: updating answer with id: " + answer.getId());
                                     realm.beginTransaction();
@@ -116,7 +113,7 @@ public class QuestionnaireFragment extends Fragment {
                             ((MainActivity) getActivity()).checkDone();
                         }
                     });
-                    for (final Answer answer : answers) {
+                    for (final Answer answer : question.getAnswers()) {
                         final RadioButton answerOption = new RadioButton(getActivity());
                         answerOption.setId(answer.getId());
                         answerOption.setText(answer.getName());
