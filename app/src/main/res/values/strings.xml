@@ -74,4 +74,13 @@ balance has dropped in value, which statement relects best how you would feel ab
     <string name="question_five_answer_five">Never or only occasionally over the longer term</string>
 
     <string name="total_score_pre">Your total score is:</string>
+
+    <string name="result_defensive">You are a "defensive" investor</string>
+    <string name="result_conservative">You are a "conservative" investor</string>
+    <string name="result_balanced">You are a "balanced" investor</string>
+    <string name="result_balanced_growth">You are a "balanced Growth" investor</string>
+    <string name="result_growth">You are a "growth" investor</string>
+    <string name="result_aggressive_growth">You are a "aggressive growth" investor</string>
+
+
 </resources>
