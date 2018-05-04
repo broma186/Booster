@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:background="@color/colorBooster"
     android:layout_height="match_parent">
 
@@ -12,6 +12,7 @@
         android:layout_gravity="center_horizontal"
         android:gravity="center_horizontal"
         android:textColor="@android:color/white"
+        android:layout_above="@id/total_score"
         android:fontFamily="@font/circular_book_bold"
         android:textSize="25dp"
         android:layout_height="wrap_content" />
@@ -22,6 +23,7 @@
         android:textColor="@color/colorBooster"
         android:padding="20dp"
         android:layout_gravity="center"
+        android:layout_centerInParent="true"
         android:textSize="40dp"
         android:background="@color/white"
         android:gravity="center"
@@ -34,11 +36,25 @@
         android:text="This text reflects what kind of investor you are"
         android:textColor="@android:color/white"
         android:textSize="20dp"
-        android:layout_marginTop="30dp"
+        android:layout_below="@id/total_score"
+        android:layout_marginTop="42dp"
         android:layout_gravity="center_horizontal"
         android:gravity="center_horizontal"
         android:fontFamily="@font/circular_book_bold"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-</LinearLayout>
+    <TextView
+        android:id="@+id/show_button"
+        android:layout_width="match_parent"
+        android:background="@android:color/holo_green_light"
+        android:fontFamily="@font/circular_book_bold"
+        android:text="Show"
+        android:layout_height="42dp"
+        android:layout_alignParentBottom="true"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textSize="24dp"/>
+
+
+</RelativeLayout>

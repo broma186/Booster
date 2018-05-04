@@ -1,27 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView android:layout_height="match_parent"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
     android:layout_width="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android">
-    <LinearLayout
-        android:id="@+id/questionnaire_layout"
-        android:isScrollContainer="true"
-        android:layout_height="match_parent"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        android:id="@+id/scroll_view"
         android:layout_width="match_parent"
-        android:orientation="vertical">
+        android:layout_height="0dp"
+        android:layout_weight="1">
 
-        <TextView
-            android:id="@+id/submit_button"
-            android:background="@android:color/holo_green_light"
-            android:text="SUBMIT"
-            android:fontFamily="@font/circular_book_bold"
-            android:textSize="25dp"
-            android:visibility="gone"
-            android:textColor="@color/white"
-            android:textAlignment="center"
-            android:layout_gravity="bottom"
-            android:gravity="bottom"
+        <LinearLayout
+            android:id="@+id/questionnaire_layout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-    </LinearLayout>
+            android:layout_height="match_parent"
+            android:isScrollContainer="true"
+            android:orientation="vertical">
 
-</ScrollView>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <TextView
+        android:id="@+id/submit_button"
+        android:layout_width="match_parent"
+        android:background="@android:color/holo_green_light"
+        android:fontFamily="@font/circular_book_bold"
+        android:text="Submit"
+        android:layout_height="42dp"
+        android:layout_weight="0"
+         android:gravity="center"
+        android:textColor="@color/white"
+        android:textSize="24dp"
+        android:visibility="gone" />
+</LinearLayout>

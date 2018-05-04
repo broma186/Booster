@@ -147,33 +147,35 @@ public class MainActivity extends AppCompatActivity implements ToolbarSetupInter
                     }
                 }
             }
-            public void showFragment(int position, Object fragment, String fragmentTag) {
-                mDrawerLayout.closeDrawer(GravityCompat.START);
 
-                // Remove the current fragment
-                if (mCurrentFragment != null) {
-                    if (mCurrentFragment instanceof Fragment) {
-                        FragmentManager fragmentManager = getSupportFragmentManager();
-                        fragmentManager.beginTransaction()
-                                .remove((Fragment) mCurrentFragment)
-                                .commitAllowingStateLoss();
-                    }
-                }
-                mNavDrawerAdapter.setSelectedItem(position); // Update new Fragment position.
-
-                // Replace the new Fragment.
-                if (!MainActivity.this.isDestroyed()) {
-                    if (fragment instanceof Fragment) {
-                        FragmentManager fragmentManager = getSupportFragmentManager();
-                        fragmentManager.beginTransaction()
-                                .replace(R.id.container, (Fragment) fragment, fragmentTag)
-                                .commitAllowingStateLoss();
-                    }
-                    mCurrentFragment = fragment;
-                }
-            }
         });
         mDrawerLayout.addDrawerListener(mActionBarDrawerToggle);
+    }
+
+    public void showFragment(int position, Object fragment, String fragmentTag) {
+        mDrawerLayout.closeDrawer(GravityCompat.START);
+
+        // Remove the current fragment
+        if (mCurrentFragment != null) {
+            if (mCurrentFragment instanceof Fragment) {
+                FragmentManager fragmentManager = getSupportFragmentManager();
+                fragmentManager.beginTransaction()
+                        .remove((Fragment) mCurrentFragment)
+                        .commitAllowingStateLoss();
+            }
+        }
+        mNavDrawerAdapter.setSelectedItem(position); // Update new Fragment position.
+
+        // Replace the new Fragment.
+        if (!MainActivity.this.isDestroyed()) {
+            if (fragment instanceof Fragment) {
+                FragmentManager fragmentManager = getSupportFragmentManager();
+                fragmentManager.beginTransaction()
+                        .replace(R.id.container, (Fragment) fragment, fragmentTag)
+                        .commitAllowingStateLoss();
+            }
+            mCurrentFragment = fragment;
+        }
     }
 
     @Override

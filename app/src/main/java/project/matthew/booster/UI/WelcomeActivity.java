@@ -70,7 +70,6 @@ public class WelcomeActivity extends AppCompatActivity implements QuestionnaireL
         realm.close();
     }
 
-    private static final String TAG = "WelcomeActivity";
     @Override
     public void loadQuestionsAndAnswers() {
         Resources res = getResources();
@@ -78,7 +77,6 @@ public class WelcomeActivity extends AppCompatActivity implements QuestionnaireL
         RealmResults<Question> questionsFromRealm = realm.where(Question.class).findAll();
 
         if (questionsFromRealm == null || questionsFromRealm.size() == 0) {
-            Log.d(TAG, "loadQuestionsAndAnswers: no questions");
             createAnswer(1, 1, res.getString(R.string.question_one_answer_one));
             createAnswer(2, 3, res.getString(R.string.question_one_answer_two));
             createAnswer(3, 5, res.getString(R.string.question_one_answer_three));
@@ -114,8 +112,6 @@ public class WelcomeActivity extends AppCompatActivity implements QuestionnaireL
             createQuestion(3, res.getString(R.string.question_three), 11, 15);
             createQuestion(4, res.getString(R.string.question_four), 16, 20);
             createQuestion(5, res.getString(R.string.question_five), 21, 25);
-        } else {
-            Log.d(TAG, "loadQuestionsAndAnswers: already questions");
         }
     }
 

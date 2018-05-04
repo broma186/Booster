@@ -133,6 +133,7 @@ public class QuestionnaireFragment extends Fragment {
                             realm.close();
 
                             if (((MainActivity) getActivity()).checkDone() && submitButton.getVisibility() != View.VISIBLE) {
+                                Log.d(TAG, "onCheckedChanged: submit vis");
                                 submitButton.setVisibility(View.VISIBLE);
                             }
                         }
@@ -157,6 +158,7 @@ public class QuestionnaireFragment extends Fragment {
                 }
             }
             if (((MainActivity) getActivity()).checkDone() && submitButton.getVisibility() != View.VISIBLE) {
+                Log.d(TAG, "onCheckedChanged: submit vis");
                 submitButton.setVisibility(View.VISIBLE);
             }
         }
