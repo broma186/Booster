@@ -125,16 +125,13 @@ public class QuestionnaireFragment extends Fragment {
                                 }
                             }
                             realm.beginTransaction();
-                            Log.d("MainActivity", "onCheckedChanged: updating question with id: " + question.getId());
                             question.setAnswered(new Boolean(true));
                             realm.insertOrUpdate(question);
                             realm.commitTransaction();
-
                             realm.close();
 
-                            if (((MainActivity) getActivity()).checkDone() && submitButton.getVisibility() != View.VISIBLE) {
-                                Log.d(TAG, "onCheckedChanged: submit vis");
-                                submitButton.setVisibility(View.VISIBLE);
+                            if (((MainActivity) getActivity()).checkDone() && resultsButton.getVisibility() != View.VISIBLE) {
+                                resultsButton.setVisibility(View.VISIBLE);
                             }
                         }
                     });
@@ -157,9 +154,8 @@ public class QuestionnaireFragment extends Fragment {
                     answerSelections.add(answerGroup);
                 }
             }
-            if (((MainActivity) getActivity()).checkDone() && submitButton.getVisibility() != View.VISIBLE) {
-                Log.d(TAG, "onCheckedChanged: submit vis");
-                submitButton.setVisibility(View.VISIBLE);
+            if (((MainActivity) getActivity()).checkDone() && resultsButton.getVisibility() != View.VISIBLE) {
+                resultsButton.setVisibility(View.VISIBLE);
             }
         }
         return rootView;
