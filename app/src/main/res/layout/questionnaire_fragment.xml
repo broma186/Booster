@@ -23,11 +23,11 @@
     </ScrollView>
 
     <TextView
-        android:id="@+id/submit_button"
+        android:id="@+id/results_button"
         android:layout_width="match_parent"
         android:background="@android:color/holo_green_light"
         android:fontFamily="@font/circular_book_bold"
-        android:text="Submit"
+        android:text="Results"
         android:layout_height="42dp"
         android:layout_weight="0"
          android:gravity="center"

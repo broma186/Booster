@@ -1,8 +1,10 @@
 package project.matthew.booster.UI.Adapters;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.PorterDuff;
+import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +12,9 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import project.matthew.booster.R;
+import project.matthew.booster.UI.Helper.Constants;
+
+import static android.view.View.GONE;
 
 /**
  * Created by Matthew on 28/04/2018.
@@ -62,10 +67,16 @@ public class NavigationDrawerListAdapter extends ArrayAdapter<String> {
         tvTitle.setSelected(selected);
 
         // tint the icon white or grey based on selected state
+        Resources res = getContext().getResources();
         if (selected) {
-            tvTitle.setTextColor(getContext().getResources().getColor(R.color.colorAccent));
+            tvTitle.setTextColor(res.getColor(R.color.colorAccent));
         } else {
-            tvTitle.setTextColor(getContext().getResources().getColor(R.color.white));
+            tvTitle.setTextColor(res.getColor(R.color.white));
+        }
+
+        // Hide Submit option if the questionnaire has not been completed yet.
+        if (tvTitle.equals(res.getString(R.string.submit_title)) && !PreferenceManager.getDefaultSharedPreferences(context).getBoolean(Constants.QUESTIONNAIRE_COMPLETE, false)) {
+            tvTitle.setVisibility(GONE);
         }
         return convertView;
     }

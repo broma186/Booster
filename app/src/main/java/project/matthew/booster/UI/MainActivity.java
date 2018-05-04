@@ -95,10 +95,6 @@ public class MainActivity extends AppCompatActivity implements ToolbarSetupInter
         return true;
     }
 
-    @Override
-    public void initToolbar() {
-       // setSupportActionBar(mToolbar);
-    }
 
     @Override
     public void hideToolbarTitle() {
@@ -206,10 +202,6 @@ public class MainActivity extends AppCompatActivity implements ToolbarSetupInter
 
         Log.d(TAG, "checkDone: num of ans questions from realm: "+ answeredQuestions.size());
         if (questionsFromRealm.size() == answeredQuestions.size()) {
-            Log.d(TAG, "checkDone: will be ready to submit");
-            Log.d(TAG, "checkDone: notified adapter of changes.");
-            mNavDrawerAdapter.setReadyToSubmit(true);
-            mNavDrawerAdapter.notifyDataSetChanged();
             return true;
         } else {
             return false;

@@ -2,6 +2,7 @@ package project.matthew.booster.UI;
 
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -9,23 +10,21 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.TextView;
-
-import org.w3c.dom.Text;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import project.matthew.booster.R;
+import project.matthew.booster.UI.Adapters.NavigationDrawerListAdapter;
 import project.matthew.booster.UI.Helper.Constants;
-import project.matthew.booster.UI.Interfaces.ShowScoreInterface;
+import project.matthew.booster.UI.Interfaces.ResultInterface;
 
 /**
  * Created by Matthew on 3/05/2018.
  */
 
-public class ResultFragment extends Fragment implements ShowScoreInterface {
+public class ResultFragment extends Fragment implements ResultInterface {
 
     private View rootView;
     private MainActivity mainActivity;
@@ -67,7 +66,15 @@ public class ResultFragment extends Fragment implements ShowScoreInterface {
 
         showScore();
 
+        setQuestionnaireComplete();
+
         return rootView;
+    }
+
+    @Override
+    public void setQuestionnaireComplete() {
+        Log.d(TAG, "setQuestionnaireComplete: setting questionnaire to complete");
+        PreferenceManager.getDefaultSharedPreferences(getContext()).edit().putBoolean(Constants.QUESTIONNAIRE_COMPLETE, true);
     }
 
     @Override

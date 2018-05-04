@@ -5,7 +5,5 @@ package project.matthew.booster.UI.Interfaces;
  */
 
 public interface ToolbarSetupInterface {
-
-    public void initToolbar();
     public void hideToolbarTitle();
 }

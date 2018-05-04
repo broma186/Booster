@@ -44,10 +44,10 @@ public class QuestionnaireFragment extends Fragment {
     @BindView(R.id.questionnaire_layout)
     LinearLayout questionnaireLayout;
 
-    @BindView(R.id.submit_button)
-    TextView submitButton;
+    @BindView(R.id.results_button)
+    TextView resultsButton;
 
-    @OnClick(R.id.submit_button)
+    @OnClick(R.id.results_button)
     public void goToResultScreen(View view) {
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
 
