@@ -55,6 +55,8 @@ public class MainActivity extends AppCompatActivity implements ToolbarSetupInter
     private boolean questionnaireDone;
     private boolean submitted;
     private int score;
+    private String investorType;
+    private String fund;
 
     private Toolbar mToolbar;
 
@@ -71,10 +73,10 @@ public class MainActivity extends AppCompatActivity implements ToolbarSetupInter
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
-       // initToolbar();
         hideToolbarTitle();
         setupNavigationDrawer();
-        //showIntroFragment();
+
+        checkDone();
     }
 
     @Override
@@ -185,9 +187,28 @@ public class MainActivity extends AppCompatActivity implements ToolbarSetupInter
     }
 
     @Override
+    public void setInvestorType(String investorType) {
+        this.investorType = investorType;
+    }
+
+    @Override
+    public String getInvestorType() {
+        return investorType;
+    }
+
+    @Override
+    public void setFund(String fund) {
+        this.fund = fund;
+    }
+
+    @Override
+    public String getFund() {
+        return fund;
+    }
+
+    @Override
     public boolean checkDone() {
         Realm realm = Realm.getDefaultInstance();
-
 
         RealmResults<Answer> answersFromRealm = realm.where(Answer.class).findAll();
         final List<Answer> answers = realm.copyFromRealm(answersFromRealm);

@@ -75,8 +75,9 @@ public class NavigationDrawerListAdapter extends ArrayAdapter<String> {
         }
 
         // Hide Submit option if the questionnaire has not been completed yet.
-        if (tvTitle.equals(res.getString(R.string.submit_title)) && !PreferenceManager.getDefaultSharedPreferences(context).getBoolean(Constants.QUESTIONNAIRE_COMPLETE, false)) {
-            tvTitle.setVisibility(GONE);
+        if (tvTitle.getText().equals(res.getString(R.string.submit_title)) && !PreferenceManager.getDefaultSharedPreferences(context).getBoolean(Constants.QUESTIONNAIRE_COMPLETE, false)) {
+            tvTitle.setTextColor(res.getColor(R.color.text_disabled));
+            tvTitle.setClickable(false);
         }
         return convertView;
     }

@@ -106,5 +106,6 @@ public class ResultFragment extends Fragment implements ResultInterface {
             investorTypeTitle = res.getString(R.string.aggressive_growth_title);
             navPosForInvestorTypeShow = Constants.AGGRESSIVE_GROWTH_TYPE_POS;
         }
+        ((MainActivity) getActivity()).setInvestorType(investorTypeTitle);
     }
 }
