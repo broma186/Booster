@@ -76,12 +76,17 @@ public class MainActivity extends AppCompatActivity implements ActionBarSetupInt
         hideActionBarTitle();
         setupNavigationDrawer();
 
+
+
         checkDone();
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main_menu, menu);
+        android.support.v7.app.ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayShowCustomEnabled(true);
+        View cView = getLayoutInflater().inflate(R.layout.booster_action_bar_layout, null);
+        actionBar.setCustomView(cView);
         return super.onCreateOptionsMenu(menu);
     }
 
