@@ -22,10 +22,6 @@ import project.matthew.booster.UI.Interfaces.InvestorTypeInterface;
 
 public class InvestorTypeFragment extends Fragment implements InvestorTypeInterface{
 
-    public enum InvestorType {
-        DEFENSIVE,
-        FEMALE
-    }
 
     private View rootView;
     private String mInvestorType;

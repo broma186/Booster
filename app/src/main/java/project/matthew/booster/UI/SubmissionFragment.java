@@ -10,18 +10,23 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.util.Properties;
+
+import javax.mail.MessagingException;
+
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import project.matthew.booster.R;
+import project.matthew.booster.UI.Helper.Emailer;
 import project.matthew.booster.UI.Helper.FormHelper;
-import project.matthew.booster.UI.Helper.MailService;
 import project.matthew.booster.UI.Interfaces.SubmissionValidationInterface;
+import rx.observers.TestObserver;
 
 /**
  * Created by Matthew on 29/04/2018.
  */
 
-public class SubmissionFragment extends Fragment implements SubmissionValidationInterface {
+public class SubmissionFragment extends Fragment implements SubmissionValidationInterface{
 
     private View rootView;
     String name, email, phone;
@@ -32,17 +37,47 @@ public class SubmissionFragment extends Fragment implements SubmissionValidation
     public void validateAndSubmitQuestionnaire(View view) {
         String validMessage = isFormValid();
         if (validMessage == null) {
-            MailService mailer = new MailService("mattbr@hotmail.co.nz","merr@mailinator.com",
-                    "Booster Investment Questionnaire","", "<b>Name: " + name +
-                    "<br />Email:" + email + "<br />Phone: " + phone + "</b>",
-                    (Attachment) null);
-            try {
-                mailer.sendAuthenticated();
-            } catch (Exception e) {
-                Log.d(TAG, "validateAndSubmitQuestionnaire: sending email failed");
-            }
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    sendEmail();
+                }
+            }).start();
         } else {
+            Log.d(TAG, "validateAndSubmitQuestionnaire: not valid");
             Toast.makeText(getContext(), validMessage, Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void sendEmail() {
+        Log.d(TAG, "sendEmail: ");
+        String host = "smtp.gmail.com";
+        String port = "587";
+        String username = "matthewboostertest@gmail.com";
+        String password = "matthiasb";
+        final String toAddress = "mattbr@hotmail.co.nz";
+        String subject = "Booster Investment Questionnaire";
+        Log.d(TAG, "sendEmail: score is in submission: " + ((MainActivity) getActivity()).getScore());
+
+        String message = "Results: " + ((MainActivity) getActivity()).getScore() + "\nName: " + name +
+                "\nEmail:" + email + "\nPhone: " + phone;
+        boolean success = true;
+        try {
+            Emailer.sendEmailWithAttachments(host, port, username, password, toAddress, subject,
+                    message, null);
+        } catch (MessagingException e) {
+            success = false;
+            Log.d(TAG, "sendEmail: sending message failed");
+            e.printStackTrace();
+        }
+        if (success) {
+            getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    Toast.makeText(getContext(), "Successfully emailed results to: " + toAddress, Toast.LENGTH_SHORT).show();
+                }
+            });
+
         }
     }
 

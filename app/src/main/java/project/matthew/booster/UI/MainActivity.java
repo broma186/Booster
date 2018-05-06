@@ -175,8 +175,13 @@ public class MainActivity extends AppCompatActivity implements ToolbarSetupInter
     }
 
     @Override
-    public void setScore() {
+    public void setScore(int score) {
+        this.score = score;
+    }
 
+    @Override
+    public int getScore() {
+        return score;
     }
 
     @Override
@@ -192,15 +197,11 @@ public class MainActivity extends AppCompatActivity implements ToolbarSetupInter
                 tempScore += answer.getValue();
             }
         }
-        score = tempScore;
-        Log.d(TAG, "checkDone: total score is: " + tempScore);
+        setScore(tempScore);
 
         RealmResults<Question> questionsFromRealm = realm.where(Question.class).findAll();
-        Log.d(TAG, "checkDone: num of questions from realm: " + questionsFromRealm.size());
         RealmResults<Question> answeredQuestions = realm.where(Question.class).equalTo("isAnswered", true).findAll();
 
-
-        Log.d(TAG, "checkDone: num of ans questions from realm: "+ answeredQuestions.size());
         if (questionsFromRealm.size() == answeredQuestions.size()) {
             return true;
         } else {
@@ -208,8 +209,5 @@ public class MainActivity extends AppCompatActivity implements ToolbarSetupInter
         }
     }
 
-    public int getScore() {
-        return score;
-    }
 
 }

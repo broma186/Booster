@@ -11,5 +11,6 @@ import java.util.ArrayList;
 
 public interface QuestionnaireCompletionInterface {
     public boolean checkDone();
-    public void setScore();
+    public void setScore(int score);
+    public int getScore();
 }

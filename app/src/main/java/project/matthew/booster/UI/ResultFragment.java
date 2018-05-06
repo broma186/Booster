@@ -73,8 +73,7 @@ public class ResultFragment extends Fragment implements ResultInterface {
 
     @Override
     public void setQuestionnaireComplete() {
-        Log.d(TAG, "setQuestionnaireComplete: setting questionnaire to complete");
-        PreferenceManager.getDefaultSharedPreferences(getContext()).edit().putBoolean(Constants.QUESTIONNAIRE_COMPLETE, true);
+        PreferenceManager.getDefaultSharedPreferences(getContext()).edit().putBoolean(Constants.QUESTIONNAIRE_COMPLETE, true).commit();
     }
 
     @Override
@@ -83,45 +82,29 @@ public class ResultFragment extends Fragment implements ResultInterface {
         score = mainActivity.getScore(); // Get score from main activity.
         totalScore.setText(String.valueOf(score)); // Display score value.
         if (score >= 5 && score <= 12) {
-            Log.d(TAG, "showScore: sel defensive");
             investmentResult.setText(res.getString(R.string.result_defensive));
             investorTypeTitle = res.getString(R.string.defensive_type_title);
             navPosForInvestorTypeShow = Constants.DEFENSIVE_TYPE_POS;
         } else if (score >= 13 && score <= 20) {
-            Log.d(TAG, "showScore: sel conservative");
             investmentResult.setText(res.getString(R.string.result_conservative));
             investorTypeTitle = res.getString(R.string.conservative_type_title);
             navPosForInvestorTypeShow = Constants.CONSERVATIVE_TYPE_POS;
         } else if (score >= 21 && score <= 29) {
-            Log.d(TAG, "showScore: sel balanced");
             investmentResult.setText(res.getString(R.string.result_balanced));
             investorTypeTitle = res.getString(R.string.balanced_type_title);
             navPosForInvestorTypeShow = Constants.BALANCED_TYPE_POS;
         } else if (score >= 30 && score <= 37) {
-            Log.d(TAG, "showScore: sel bal_growth");
             investmentResult.setText(res.getString(R.string.result_balanced_growth));
             investorTypeTitle = res.getString(R.string.balanced_growth_title);
             navPosForInvestorTypeShow = Constants.BALANCED_GROWTH_TYPE_POS;
         } else if (score >= 38 && score <= 44) {
-            Log.d(TAG, "showScore: sel growth");
             investmentResult.setText(res.getString(R.string.result_growth));
             investorTypeTitle = res.getString(R.string.growth_title);
             navPosForInvestorTypeShow = Constants.GROWTH_TYPE_POS;
         } else if (score >= 45 && score <= 50) {
-            Log.d(TAG, "showScore: sel aggress growth");
             investmentResult.setText(res.getString(R.string.result_aggressive_growth));
             investorTypeTitle = res.getString(R.string.aggressive_growth_title);
             navPosForInvestorTypeShow = Constants.AGGRESSIVE_GROWTH_TYPE_POS;
         }
     }
 }
-
-/*
-  <string name="defensive_type_title">Defensive</string>
-    <string name="conservative_type_title">Conservative</string>
-    <string name="balanced_type_title">Balanced</string>
-    <string name="balanced_growth_title">Balanced Growth</string>
-    <string name="growth_title">Growth</string>
-    <string name="aggressive_growth_title">Aggressive Growth</string>
-
- */

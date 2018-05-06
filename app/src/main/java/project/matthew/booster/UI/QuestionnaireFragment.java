@@ -39,7 +39,6 @@ import project.matthew.booster.UI.Models.Question;
 public class QuestionnaireFragment extends Fragment {
 
     private View rootView;
-    private ArrayList<RadioGroup> answerSelections;
 
     @BindView(R.id.questionnaire_layout)
     LinearLayout questionnaireLayout;
@@ -75,7 +74,6 @@ public class QuestionnaireFragment extends Fragment {
         rootView = inflater.inflate(R.layout.questionnaire_fragment, container, false);
         ButterKnife.bind(this, rootView);
 
-        answerSelections = new ArrayList<RadioGroup>();
 
         mFont = Typeface.createFromAsset(getActivity().getAssets(),"circular_book.ttf");
 
@@ -112,7 +110,6 @@ public class QuestionnaireFragment extends Fragment {
                             Realm realm = Realm.getDefaultInstance();
                             for (Answer answer : question.getAnswers()) {
                                 if (answer.getId() == checkedId) {
-                                    Log.d("MainActivity", "onCheckedChanged: updating answer with id: " + answer.getId());
                                     realm.beginTransaction();
                                     answer.setSelected(true);
                                     realm.insertOrUpdate(answer);
@@ -151,7 +148,6 @@ public class QuestionnaireFragment extends Fragment {
                         answerGroup.addView(answerOption);
                     }
                     questionnaireLayout.addView(answerGroup);
-                    answerSelections.add(answerGroup);
                 }
             }
             if (((MainActivity) getActivity()).checkDone() && resultsButton.getVisibility() != View.VISIBLE) {
