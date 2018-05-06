@@ -1,6 +1,9 @@
 package project.matthew.booster.UI;
 
+import android.app.ActionBar;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -10,7 +13,6 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.transitions.everywhere.TransitionManager;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -18,21 +20,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.RadioGroup;
 import android.widget.TextView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.realm.Realm;
-import io.realm.RealmQuery;
 import io.realm.RealmResults;
 import project.matthew.booster.R;
 import project.matthew.booster.UI.Adapters.NavigationDrawerListAdapter;
+import project.matthew.booster.UI.Helper.Constants;
 import project.matthew.booster.UI.Interfaces.QuestionnaireCompletionInterface;
-import project.matthew.booster.UI.Interfaces.ToolbarSetupInterface;
+import project.matthew.booster.UI.Interfaces.ActionBarSetupInterface;
 import project.matthew.booster.UI.Interfaces.NavigationSetupInterface;
 import project.matthew.booster.UI.Models.Answer;
 import project.matthew.booster.UI.Models.Question;
@@ -43,7 +43,7 @@ import static android.view.View.GONE;
  * Created by Matthew on 27/04/2018.
  */
 
-public class MainActivity extends AppCompatActivity implements ToolbarSetupInterface, NavigationSetupInterface, QuestionnaireCompletionInterface {
+public class MainActivity extends AppCompatActivity implements ActionBarSetupInterface, NavigationSetupInterface, QuestionnaireCompletionInterface {
     private static final String TAG = "MainActivity";
 
     @BindView(R.id.nav_drawer_layout)
@@ -73,7 +73,7 @@ public class MainActivity extends AppCompatActivity implements ToolbarSetupInter
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
-        hideToolbarTitle();
+        hideActionBarTitle();
         setupNavigationDrawer();
 
         checkDone();
@@ -99,9 +99,11 @@ public class MainActivity extends AppCompatActivity implements ToolbarSetupInter
 
 
     @Override
-    public void hideToolbarTitle() {
+    public void hideActionBarTitle() {
         getSupportActionBar().setDisplayShowTitleEnabled(false);
     }
+
+
 
     @Override
     public void setupNavigationDrawer() {
@@ -127,21 +129,23 @@ public class MainActivity extends AppCompatActivity implements ToolbarSetupInter
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 TransitionManager.beginDelayedTransition((ViewGroup) adapterView.getRootView());
                 mainInfoText.setVisibility(GONE); // Hide the main app info text.
-                TextView navItemTextView = (TextView)view.findViewById(R.id.nav_title);
+                TextView navItemTextView = (TextView) view.findViewById(R.id.nav_title);
                 if (navItemTextView != null) {
                     String navItemTitle = (String) navItemTextView.getText();
                     switch (navItemTitle) {
                         case "Investor Types":
-                           // Do nothing
+                            // Do nothing
                             break;
                         case "Questionnaire":
                             showFragment(position, new QuestionnaireFragment(), navItemTitle);
                             break;
                         case "Submit":
-                            showFragment(position, new SubmissionFragment(), navItemTitle);
+                            if (PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getBoolean(Constants.QUESTIONNAIRE_COMPLETE, false)) {
+                                showFragment(position, new SubmissionFragment(), navItemTitle);
+                            }
                             break;
-                            default:
-                                showFragment(position, new InvestorTypeFragment(), navItemTitle);
+                        default:
+                            showFragment(position, new InvestorTypeFragment(), navItemTitle);
                     }
                 }
             }
@@ -213,7 +217,7 @@ public class MainActivity extends AppCompatActivity implements ToolbarSetupInter
         RealmResults<Answer> answersFromRealm = realm.where(Answer.class).findAll();
         final List<Answer> answers = realm.copyFromRealm(answersFromRealm);
         int tempScore = 0;
-        for (Answer answer: answers) {
+        for (Answer answer : answers) {
             if (answer.isSelected()) {
                 tempScore += answer.getValue();
             }

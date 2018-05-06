@@ -133,7 +133,7 @@ public class SubmissionFragment extends Fragment implements SubmissionInterface 
     }
 
     @Override
-    public void showSuccessDialog(String toAddress) {
+    public void showSuccessDialog() {
         getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
