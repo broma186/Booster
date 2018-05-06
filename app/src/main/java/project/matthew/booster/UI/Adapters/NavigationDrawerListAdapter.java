@@ -4,11 +4,16 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.PorterDuff;
+import android.graphics.Typeface;
 import android.preference.PreferenceManager;
+import android.text.SpannableString;
+import android.text.style.UnderlineSpan;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import project.matthew.booster.R;
@@ -74,8 +79,32 @@ public class NavigationDrawerListAdapter extends ArrayAdapter<String> {
             tvTitle.setTextColor(res.getColor(R.color.white));
         }
 
+
+        // If selected investor type title or questionnaire title or submit title, change the font to bold, make text larger
+        // underline and make not as nested as other entries.
+        if (tvTitle.getText().equals(res.getString(R.string.investor_types_header)) ||
+                tvTitle.getText().equals(res.getString(R.string.questionnaire_title)) ||
+                tvTitle.getText().equals(res.getString(R.string.submit_title))) {
+
+            Typeface font = Typeface.createFromAsset(context.getAssets(),"circular_book_bold.ttf");
+            tvTitle.setTypeface(font);
+            tvTitle.setTextSize(22);
+
+            // Make underlined
+            SpannableString content = new SpannableString(tvTitle.getText());
+            content.setSpan(new UnderlineSpan(), 0, content.length(), 0);
+            tvTitle.setText(content);
+
+            LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            lp.setMargins(42, 60, 0, 0);
+            tvTitle.setLayoutParams(lp);
+        } else {
+            SpannableString content = new SpannableString(tvTitle.getText());
+            tvTitle.setText(content);
+        }
         // Hide Submit option if the questionnaire has not been completed yet.
         if (tvTitle.getText().equals(res.getString(R.string.submit_title)) && !PreferenceManager.getDefaultSharedPreferences(context).getBoolean(Constants.QUESTIONNAIRE_COMPLETE, false)) {
+            Log.d("navo", "getView: setting text colour");
             tvTitle.setTextColor(res.getColor(R.color.text_disabled));
         }
         return convertView;

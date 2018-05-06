@@ -96,7 +96,7 @@ public class SubmissionFragment extends Fragment implements SubmissionInterface 
         subject = username + " Booster Investment Questionnaire";
 
         String message = "Results: " + ((MainActivity) getActivity()).getScore() + "\nName: " + name +
-                "\nEmail:" + email + "\nPhone: " + phone;
+                "\nEmail: " + email + "\nPhone: " + phone;
 
         boolean success = true;
         showProgressDialog();

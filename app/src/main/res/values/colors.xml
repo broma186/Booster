@@ -6,6 +6,7 @@
     <color name="colorBooster">#177ECD</color>
     <color name="boosterYellow">#ffdd55</color>
     <color name="boosterGreen">#9ed07c</color>
+    <color name="boosterBlack">#2d2d2d</color>
     <color name="white">#FFFFFF</color>
     <color name="text_disabled">#777777</color>
 </resources>

@@ -12,6 +12,9 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.SpannedString;
 import android.transitions.everywhere.TransitionManager;
 import android.view.Gravity;
 import android.view.Menu;
@@ -19,6 +22,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -90,6 +94,15 @@ public class MainActivity extends AppCompatActivity implements ActionBarSetupInt
         return super.onCreateOptionsMenu(menu);
     }
 
+    public void openDrawer(View view) {
+        if (!mDrawerLayout.isDrawerOpen(Gravity.START)) {
+            mDrawerLayout.openDrawer(Gravity.START);
+        } else {
+            mDrawerLayout.closeDrawer(Gravity.START);
+        }
+    }
+
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getTitle().equals(getString(R.string.menu_title))) {
@@ -132,31 +145,39 @@ public class MainActivity extends AppCompatActivity implements ActionBarSetupInt
         mNavigationDrawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                TransitionManager.beginDelayedTransition((ViewGroup) adapterView.getRootView());
-                mainInfoText.setVisibility(GONE); // Hide the main app info text.
+
                 TextView navItemTextView = (TextView) view.findViewById(R.id.nav_title);
                 if (navItemTextView != null) {
-                    String navItemTitle = (String) navItemTextView.getText();
-                    switch (navItemTitle) {
+                    SpannedString navItemTitle = (SpannedString) navItemTextView.getText();
+                    String itemTitle = navItemTitle.toString();
+                    switch (itemTitle) {
                         case "Investor Types":
                             // Do nothing
                             break;
                         case "Questionnaire":
-                            showFragment(position, new QuestionnaireFragment(), navItemTitle);
+                            hideMainInfoText(adapterView);
+                            showFragment(position, new QuestionnaireFragment(), itemTitle);
                             break;
                         case "Submit":
+                              hideMainInfoText(adapterView);
                             if (PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getBoolean(Constants.QUESTIONNAIRE_COMPLETE, false)) {
-                                showFragment(position, new SubmissionFragment(), navItemTitle);
+                                showFragment(position, new SubmissionFragment(), itemTitle);
                             }
                             break;
                         default:
-                            showFragment(position, new InvestorTypeFragment(), navItemTitle);
+                            hideMainInfoText(adapterView);
+                            showFragment(position, new InvestorTypeFragment(), itemTitle);
                     }
                 }
             }
 
         });
         mDrawerLayout.addDrawerListener(mActionBarDrawerToggle);
+    }
+
+    private void hideMainInfoText(AdapterView<?> adapterView) {
+        TransitionManager.beginDelayedTransition((ViewGroup) adapterView.getRootView());
+        mainInfoText.setVisibility(GONE); // Hide the main app info text.
     }
 
     public void showFragment(int position, Object fragment, String fragmentTag) {

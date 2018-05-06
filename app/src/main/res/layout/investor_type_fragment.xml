@@ -11,9 +11,9 @@
     android:layout_gravity="center_horizontal"
     android:gravity="center_horizontal"
     android:layout_marginTop="10dp"
-    android:textSize="25dp"
+    android:textSize="25sp"
     android:fontFamily="@font/circular_book_bold"
-    android:textColor="@color/white"
+    android:textColor="@color/colorBooster"
     android:text="title"
     android:layout_height="wrap_content" />
 
@@ -27,12 +27,13 @@
     <TextView
         android:id="@+id/investor_type_description"
         android:text="This is sample investor type description text. Hopefully the text will wrap correctly as you would expect"
-        android:textSize="16dp"
+        android:textSize="18sp"
         android:fontFamily="@font/circular_book"
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
         android:layout_marginTop="10dp"
-        android:textColor="@color/white"
+        android:textAlignment="center"
+        android:textColor="@color/colorBooster"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 </LinearLayout>

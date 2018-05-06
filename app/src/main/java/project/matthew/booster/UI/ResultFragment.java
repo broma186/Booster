@@ -44,16 +44,11 @@ public class ResultFragment extends Fragment implements ResultInterface {
 
     @OnClick(R.id.show_button)
     public void goToInvestorType(View view) {
-        mFragmentManager.beginTransaction()
-                .remove((Fragment) this)
-                .commitAllowingStateLoss();
-
         ((MainActivity) getActivity()).showFragment(navPosForInvestorTypeShow, new InvestorTypeFragment(), investorTypeTitle);
     }
 
     private int score;
 
-    private static final String TAG = "ResultFragment";
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

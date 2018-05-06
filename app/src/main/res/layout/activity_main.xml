@@ -14,11 +14,11 @@
             android:id="@+id/container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/colorBooster"></FrameLayout>
+            android:background="@android:color/white"></FrameLayout>
         <TextView
             android:id="@+id/main_info_text"
             android:padding="42dp"
-            android:textColor="@android:color/white"
+            android:textColor="@color/colorBooster"
             android:textAlignment="center"
             android:fontFamily="@font/circular_book"
             android:textSize="22dp"

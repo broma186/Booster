@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:background="@color/colorBooster"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -11,19 +11,19 @@
 
         <TextView
             android:id="@+id/name_title"
-            android:fontFamily="@font/circular_book_bold"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/name_title"
             android:layout_marginRight="20dp"
-            android:textColor="@android:color/white"
-            android:textSize="20dp"/>
+            android:fontFamily="@font/circular_book_bold"
+            android:text="@string/name_title"
+            android:textColor="@color/colorBooster"
+            android:textSize="20dp" />
 
         <EditText
             android:id="@+id/name"
-            android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ" />
     </RelativeLayout>
 
     <RelativeLayout
@@ -34,11 +34,11 @@
             android:id="@+id/email_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/email_title"
             android:layout_marginRight="20dp"
             android:fontFamily="@font/circular_book_bold"
-            android:textColor="@android:color/white"
-            android:textSize="20dp"/>
+            android:textColor="@color/colorBooster"
+            android:text="@string/email_title"
+            android:textSize="20dp" />
 
         <EditText
             android:id="@+id/email"
@@ -54,29 +54,29 @@
             android:id="@+id/phone_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/phone_title"
             android:layout_marginRight="20dp"
             android:fontFamily="@font/circular_book_bold"
-            android:textColor="@android:color/white"
-            android:textSize="20dp"/>
+            android:text="@string/phone_title"
+            android:textColor="@color/colorBooster"
+            android:textSize="20dp" />
 
         <EditText
             android:id="@+id/phone"
-            android:inputType="number"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:inputType="number" />
     </RelativeLayout>
 
     <Button
         android:id="@+id/submit_button"
-        android:text="@string/submit_title"
-        android:layout_gravity="center_horizontal"
-        android:gravity="center_horizontal"
-        android:background="@android:color/holo_green_light"
         android:layout_width="wrap_content"
-        android:padding="10dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:background="@android:color/holo_green_light"
         android:fontFamily="@font/circular_book_bold"
+        android:gravity="center_horizontal"
+        android:padding="10dp"
+        android:text="@string/submit_title"
         android:textColor="@android:color/white"
-        android:textSize="30dp"
-        android:layout_height="wrap_content" />
+        android:textSize="30dp" />
 </LinearLayout>

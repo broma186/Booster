@@ -85,13 +85,14 @@ public class QuestionnaireFragment extends Fragment {
         if (questions != null & questions.size() > 0) {
             for (final Question question : questions) {
                 TextView questionView = new TextView(getActivity());
+                questionView.setBackgroundColor(getResources().getColor(R.color.boosterYellow));
                 questionView.setText(question.getTitle());
-                LinearLayout.LayoutParams vglp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-                vglp.setMargins(10, 20, 10, 20);
+                LinearLayout.LayoutParams vglp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                vglp.setMargins(0, 20, 10, 20);
                 questionView.setLayoutParams(vglp);
                 questionView.setTypeface(mFont);
                 questionView.setTextSize(18);
-                questionView.setTextColor(getResources().getColor(R.color.white));
+                questionView.setTextColor(getResources().getColor(R.color.boosterBlack));
                 questionView.setGravity(Gravity.CENTER_HORIZONTAL);
                 questionnaireLayout.addView(questionView);
 
@@ -102,7 +103,6 @@ public class QuestionnaireFragment extends Fragment {
                     aglp.setMargins(10, 20, 10, 20);
                     answerGroup.setLayoutParams(aglp);
                     answerGroup.setGravity(Gravity.LEFT);
-
                     answerGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
                         @Override
                         public void onCheckedChanged(RadioGroup radioGroup, int checkedId) {
@@ -141,7 +141,7 @@ public class QuestionnaireFragment extends Fragment {
                         LinearLayout.LayoutParams rblp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
                         rblp.setMargins(20, 10, 20, 10);
                         answerOption.setLayoutParams(rblp);
-                        answerOption.setTextColor(getResources().getColor(R.color.white));
+                        answerOption.setTextColor(getResources().getColor(R.color.colorBooster));
                         answerOption.setContentDescription(String.valueOf(answer.getValue()));
                         answerOption.setChecked(answer.isSelected());
 
