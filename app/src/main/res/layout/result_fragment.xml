@@ -47,7 +47,7 @@
     <TextView
         android:id="@+id/show_button"
         android:layout_width="match_parent"
-        android:background="@android:color/holo_green_light"
+        android:background="@color/boosterGreen"
         android:fontFamily="@font/circular_book_bold"
         android:text="Show"
         android:layout_height="42dp"

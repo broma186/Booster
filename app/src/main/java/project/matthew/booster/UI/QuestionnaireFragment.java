@@ -85,24 +85,25 @@ public class QuestionnaireFragment extends Fragment {
         if (questions != null & questions.size() > 0) {
             for (final Question question : questions) {
                 TextView questionView = new TextView(getActivity());
-                questionView.setBackgroundColor(getResources().getColor(R.color.boosterYellow));
+                questionView.setBackgroundColor(getResources().getColor(R.color.colorBooster));
                 questionView.setText(question.getTitle());
                 LinearLayout.LayoutParams vglp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-                vglp.setMargins(0, 20, 10, 20);
+                vglp.setMargins(0, 20, 0, 20);
                 questionView.setLayoutParams(vglp);
                 questionView.setTypeface(mFont);
                 questionView.setTextSize(18);
-                questionView.setTextColor(getResources().getColor(R.color.boosterBlack));
+                questionView.setTextColor(getResources().getColor(R.color.white));
                 questionView.setGravity(Gravity.CENTER_HORIZONTAL);
                 questionnaireLayout.addView(questionView);
 
                 if (question.getAnswers() != null && question.getAnswers().size() > 0) {
                     final RadioGroup answerGroup = new RadioGroup(getActivity());
                     answerGroup.setId(question.getId());
-                    LinearLayout.LayoutParams aglp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-                    aglp.setMargins(10, 20, 10, 20);
+                    LinearLayout.LayoutParams aglp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                    aglp.setMargins(10, 0, 10, 0);
                     answerGroup.setLayoutParams(aglp);
                     answerGroup.setGravity(Gravity.LEFT);
+                    answerGroup.setBackgroundColor(getResources().getColor(R.color.boosterGreen));
                     answerGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
                         @Override
                         public void onCheckedChanged(RadioGroup radioGroup, int checkedId) {
