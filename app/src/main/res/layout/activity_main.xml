@@ -23,6 +23,7 @@
             android:fontFamily="@font/circular_book"
             android:textSize="22dp"
             android:gravity="center"
+            android:background="@color/boosterGreen"
             android:text="@string/main_menu_text"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />

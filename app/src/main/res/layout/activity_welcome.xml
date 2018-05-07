@@ -11,13 +11,17 @@
         android:id="@+id/booster_title_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/welcome_button"
-        android:layout_alignParentStart="true"
-        android:src="@drawable/booster_logo" />
+
+        android:layout_centerInParent="true"
+        android:src="@drawable/toolbarimg" />
     <Button
         android:id="@+id/welcome_button"
+        android:background="@color/colorBooster"
+        android:textColor="@color/white"
+        android:fontFamily="@font/circular_book_bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
+        android:layout_below="@+id/booster_title_image"
+        android:layout_centerHorizontal="true"
         android:text="@string/welcome" />
 </RelativeLayout>
