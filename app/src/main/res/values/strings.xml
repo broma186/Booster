@@ -84,9 +84,9 @@ balance has dropped in value, which statement relects best how you would feel ab
     <string name="result_growth">You are a "growth" investor</string>
     <string name="result_aggressive_growth">You are an "aggressive growth" investor</string>
 
-    <string name="name_title">Name</string>
-    <string name="email_title">Email</string>
-    <string name="phone_title">Phone</string>
+    <string name="name_title">Name:</string>
+    <string name="email_title">Email:</string>
+    <string name="phone_title">Phone:</string>
     <string name="error_no_name">Please enter a name</string>
     <string name="error_invalid_email">Please enter a valid email address</string>
     <string name="error_no_phone">Please enter a phone number</string>
