@@ -180,6 +180,8 @@ public class MainActivity extends AppCompatActivity implements ActionBarSetupInt
         mainInfoText.setVisibility(GONE); // Hide the main app info text.
     }
 
+
+
     public void showFragment(int position, Object fragment, String fragmentTag) {
         mDrawerLayout.closeDrawer(GravityCompat.START);
 
@@ -204,6 +206,10 @@ public class MainActivity extends AppCompatActivity implements ActionBarSetupInt
             }
             mCurrentFragment = fragment;
         }
+    }
+
+    public void setCurrentFragment(Object fragment) {
+        mCurrentFragment = fragment;
     }
 
     @Override
@@ -234,6 +240,10 @@ public class MainActivity extends AppCompatActivity implements ActionBarSetupInt
     @Override
     public String getFund() {
         return fund;
+    }
+
+    public NavigationDrawerListAdapter getNavAdapter() {
+        return mNavDrawerAdapter;
     }
 
     @Override

@@ -6,17 +6,14 @@ import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import project.matthew.booster.R;
-import project.matthew.booster.UI.Adapters.NavigationDrawerListAdapter;
 import project.matthew.booster.UI.Helper.Constants;
 import project.matthew.booster.UI.Interfaces.ResultInterface;
 

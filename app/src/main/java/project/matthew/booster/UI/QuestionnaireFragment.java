@@ -50,17 +50,11 @@ public class QuestionnaireFragment extends Fragment {
     public void goToResultScreen(View view) {
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
 
-        // Remove questionnaire fragment.
-        fragmentManager.beginTransaction()
-                .remove((Fragment) this)
-                .commitAllowingStateLoss();
-
         // Replace with questionnaire fragment.
         ResultFragment resFrag = new ResultFragment();
         fragmentManager.beginTransaction()
                 .replace(R.id.container, (Fragment) resFrag, "RESULT")
                 .commitAllowingStateLoss();
-
     }
 
     private Typeface mFont;
