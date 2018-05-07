@@ -14,7 +14,7 @@
         android:textColor="@android:color/white"
         android:layout_above="@id/total_score"
         android:fontFamily="@font/circular_book_bold"
-        android:textSize="25dp"
+        android:textSize="35dp"
         android:layout_height="wrap_content" />
 
     <TextView
@@ -54,7 +54,7 @@
         android:layout_alignParentBottom="true"
         android:gravity="center"
         android:textColor="@color/colorBooster"
-        android:textSize="24dp"/>
+        android:textSize="30dp"/>
 
 
 </RelativeLayout>

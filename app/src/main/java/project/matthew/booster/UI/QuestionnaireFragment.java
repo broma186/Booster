@@ -94,7 +94,7 @@ public class QuestionnaireFragment extends Fragment {
                 questionView.setBackgroundColor(getResources().getColor(R.color.colorBooster));
                 questionView.setText(question.getTitle());
                 LinearLayout.LayoutParams vglp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-                vglp.setMargins(42, 40, 42, 40);
+                vglp.setMargins(42, 42, 42, 42);
                 questionView.setLayoutParams(vglp);
                 questionView.setTypeface(mFont);
                 questionView.setTextSize(20);
@@ -103,9 +103,16 @@ public class QuestionnaireFragment extends Fragment {
                 outerQuestion.addView(questionView);
 
                 if (question.getAnswers() != null && question.getAnswers().size() > 0) {
+                    LinearLayout outerGroup = new LinearLayout(getActivity());
+                    LinearLayout.LayoutParams outerGroupParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                    outerGroup.setLayoutParams(outerParams);
+                    outerGroup.setBackgroundColor(getResources().getColor(R.color.boosterGreen));
+                    questionnaireLayout.addView(outerGroup);
+
                     final RadioGroup answerGroup = new RadioGroup(getActivity());
                     answerGroup.setId(question.getId());
                     LinearLayout.LayoutParams aglp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                    aglp.setMargins(42, 42, 42, 42);
                     answerGroup.setLayoutParams(aglp);
                     answerGroup.setGravity(Gravity.LEFT);
                     answerGroup.setBackgroundColor(getResources().getColor(R.color.boosterGreen));
@@ -145,7 +152,7 @@ public class QuestionnaireFragment extends Fragment {
                         answerOption.setTypeface(mFont);
                         questionView.setTextSize(17);
                         LinearLayout.LayoutParams rblp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-                        rblp.setMargins(30, 60, 30, 60);
+                        rblp.setMargins(42, 100, 42, 100);
                         answerOption.setLayoutParams(rblp);
                         answerOption.setTextColor(getResources().getColor(R.color.colorBooster));
                         answerOption.setContentDescription(String.valueOf(answer.getValue()));
@@ -153,7 +160,7 @@ public class QuestionnaireFragment extends Fragment {
 
                         answerGroup.addView(answerOption);
                     }
-                    questionnaireLayout.addView(answerGroup);
+                    outerGroup.addView(answerGroup);
                 }
             }
             if (((MainActivity) getActivity()).checkDone() && resultsButton.getVisibility() != View.VISIBLE) {
