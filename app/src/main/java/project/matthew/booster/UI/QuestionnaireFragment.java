@@ -84,23 +84,28 @@ public class QuestionnaireFragment extends Fragment {
 
         if (questions != null & questions.size() > 0) {
             for (final Question question : questions) {
+                LinearLayout outerQuestion = new LinearLayout(getActivity());
+                LinearLayout.LayoutParams outerParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                outerQuestion.setLayoutParams(outerParams);
+                outerQuestion.setBackgroundColor(getResources().getColor(R.color.colorBooster));
+                questionnaireLayout.addView(outerQuestion);
+
                 TextView questionView = new TextView(getActivity());
                 questionView.setBackgroundColor(getResources().getColor(R.color.colorBooster));
                 questionView.setText(question.getTitle());
                 LinearLayout.LayoutParams vglp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-                vglp.setMargins(0, 20, 0, 20);
+                vglp.setMargins(42, 40, 42, 40);
                 questionView.setLayoutParams(vglp);
                 questionView.setTypeface(mFont);
-                questionView.setTextSize(18);
+                questionView.setTextSize(20);
                 questionView.setTextColor(getResources().getColor(R.color.white));
                 questionView.setGravity(Gravity.CENTER_HORIZONTAL);
-                questionnaireLayout.addView(questionView);
+                outerQuestion.addView(questionView);
 
                 if (question.getAnswers() != null && question.getAnswers().size() > 0) {
                     final RadioGroup answerGroup = new RadioGroup(getActivity());
                     answerGroup.setId(question.getId());
                     LinearLayout.LayoutParams aglp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-                    aglp.setMargins(10, 0, 10, 0);
                     answerGroup.setLayoutParams(aglp);
                     answerGroup.setGravity(Gravity.LEFT);
                     answerGroup.setBackgroundColor(getResources().getColor(R.color.boosterGreen));
@@ -138,9 +143,9 @@ public class QuestionnaireFragment extends Fragment {
                         answerOption.setId(answer.getId());
                         answerOption.setText(answer.getName());
                         answerOption.setTypeface(mFont);
-                        questionView.setTextSize(15);
+                        questionView.setTextSize(17);
                         LinearLayout.LayoutParams rblp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-                        rblp.setMargins(20, 10, 20, 10);
+                        rblp.setMargins(30, 60, 30, 60);
                         answerOption.setLayoutParams(rblp);
                         answerOption.setTextColor(getResources().getColor(R.color.colorBooster));
                         answerOption.setContentDescription(String.valueOf(answer.getValue()));

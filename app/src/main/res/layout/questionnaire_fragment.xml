@@ -26,7 +26,7 @@
     <TextView
         android:id="@+id/results_button"
         android:layout_width="match_parent"
-        android:background="@android:color/holo_green_light"
+        android:background="@color/boosterYellow"
         android:fontFamily="@font/circular_book_bold"
         android:textColor="@color/colorBooster"
         android:text="Results"
