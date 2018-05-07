@@ -48,7 +48,6 @@ import static android.view.View.GONE;
  */
 
 public class MainActivity extends AppCompatActivity implements ActionBarSetupInterface, NavigationSetupInterface, QuestionnaireCompletionInterface {
-    private static final String TAG = "MainActivity";
 
     @BindView(R.id.nav_drawer_layout)
     DrawerLayout mDrawerLayout;
@@ -56,18 +55,12 @@ public class MainActivity extends AppCompatActivity implements ActionBarSetupInt
     @BindView(R.id.main_info_text)
     TextView mainInfoText;
 
-    private boolean questionnaireDone;
-    private boolean submitted;
     private int score;
     private String investorType;
     private String fund;
-
-    private Toolbar mToolbar;
-
     private NavigationDrawerListAdapter mNavDrawerAdapter;
     private ListView mNavigationDrawerList;
     private ActionBarDrawerToggle mActionBarDrawerToggle;
-
     private Object mCurrentFragment;
 
 
@@ -79,8 +72,6 @@ public class MainActivity extends AppCompatActivity implements ActionBarSetupInt
 
         hideActionBarTitle();
         setupNavigationDrawer();
-
-
 
         checkDone();
     }
@@ -122,7 +113,6 @@ public class MainActivity extends AppCompatActivity implements ActionBarSetupInt
     }
 
 
-
     @Override
     public void setupNavigationDrawer() {
         mNavDrawerAdapter = new NavigationDrawerListAdapter(this);
@@ -159,7 +149,7 @@ public class MainActivity extends AppCompatActivity implements ActionBarSetupInt
                             showFragment(position, new QuestionnaireFragment(), itemTitle);
                             break;
                         case "Submit":
-                              hideMainInfoText(adapterView);
+                            hideMainInfoText(adapterView);
                             if (PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getBoolean(Constants.QUESTIONNAIRE_COMPLETE, false)) {
                                 showFragment(position, new SubmissionFragment(), itemTitle);
                             }
@@ -179,7 +169,6 @@ public class MainActivity extends AppCompatActivity implements ActionBarSetupInt
         TransitionManager.beginDelayedTransition((ViewGroup) adapterView.getRootView());
         mainInfoText.setVisibility(GONE); // Hide the main app info text.
     }
-
 
 
     public void showFragment(int position, Object fragment, String fragmentTag) {
@@ -206,10 +195,6 @@ public class MainActivity extends AppCompatActivity implements ActionBarSetupInt
             }
             mCurrentFragment = fragment;
         }
-    }
-
-    public void setCurrentFragment(Object fragment) {
-        mCurrentFragment = fragment;
     }
 
     @Override
@@ -240,10 +225,6 @@ public class MainActivity extends AppCompatActivity implements ActionBarSetupInt
     @Override
     public String getFund() {
         return fund;
-    }
-
-    public NavigationDrawerListAdapter getNavAdapter() {
-        return mNavDrawerAdapter;
     }
 
     @Override

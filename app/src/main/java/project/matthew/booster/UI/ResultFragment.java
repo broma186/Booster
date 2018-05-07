@@ -41,6 +41,7 @@ public class ResultFragment extends Fragment implements ResultInterface {
 
     @OnClick(R.id.show_button)
     public void goToInvestorType(View view) {
+        //this will clear the back stack and displays no animation on the screen
         ((MainActivity) getActivity()).showFragment(navPosForInvestorTypeShow, new InvestorTypeFragment(), investorTypeTitle);
     }
 
