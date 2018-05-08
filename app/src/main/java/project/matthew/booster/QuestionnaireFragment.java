@@ -1,25 +1,20 @@
-package project.matthew.booster.UI;
+package project.matthew.booster;
 
 
-import android.content.res.AssetManager;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -27,10 +22,8 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import io.realm.Realm;
 import io.realm.RealmResults;
-import project.matthew.booster.R;
-import project.matthew.booster.UI.Interfaces.QuestionnaireLoadInterface;
-import project.matthew.booster.UI.Models.Answer;
-import project.matthew.booster.UI.Models.Question;
+import project.matthew.booster.Models.Answer;
+import project.matthew.booster.Models.Question;
 
 /**
  * Created by Matthew on 30/04/2018.

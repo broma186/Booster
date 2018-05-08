@@ -1,4 +1,4 @@
-package project.matthew.booster.UI;
+package project.matthew.booster;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -18,16 +18,11 @@ import javax.mail.MessagingException;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import io.realm.Realm;
-import io.realm.RealmResults;
-import project.matthew.booster.R;
-import project.matthew.booster.UI.Helper.Constants;
-import project.matthew.booster.UI.Helper.Emailer;
-import project.matthew.booster.UI.Helper.FormHelper;
-import project.matthew.booster.UI.Helper.RealmHelper;
-import project.matthew.booster.UI.Interfaces.SubmissionInterface;
-import project.matthew.booster.UI.Models.Answer;
-import project.matthew.booster.UI.Models.Question;
+import project.matthew.booster.Helper.Constants;
+import project.matthew.booster.Helper.Emailer;
+import project.matthew.booster.Helper.FormHelper;
+import project.matthew.booster.Helper.RealmHelper;
+import project.matthew.booster.Interfaces.SubmissionInterface;
 
 /**
  * Created by Matthew on 29/04/2018.
@@ -108,7 +103,7 @@ public class SubmissionFragment extends Fragment implements SubmissionInterface 
         username = getString(R.string.username);
         password = getString(R.string.password);
         toAddress = email;
-        subject = username + getString(R.string.subject);
+        subject = getString(R.string.subject);
 
         String message = "Results: " + ((MainActivity) getActivity()).getScore() + "\nName: " + name +
                 "\nEmail: " + email + "\nPhone: " + phone;
@@ -125,6 +120,8 @@ public class SubmissionFragment extends Fragment implements SubmissionInterface 
         }
         if (success) {
             showSuccessDialog();
+        } else {
+            Toast.makeText(getContext(), "Failed to send results", Toast.LENGTH_LONG).show();
         }
     }
 

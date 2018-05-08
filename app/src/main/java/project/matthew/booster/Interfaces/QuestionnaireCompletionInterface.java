@@ -1,9 +1,4 @@
-package project.matthew.booster.UI.Interfaces;
-
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
-
-import java.util.ArrayList;
+package project.matthew.booster.Interfaces;
 
 /**
  * Created by Matthew on 2/05/2018.

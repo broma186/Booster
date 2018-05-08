@@ -1,4 +1,4 @@
-package project.matthew.booster.UI.Interfaces;
+package project.matthew.booster.Interfaces;
 
 /**
  * Created by Matthew on 4/05/2018.

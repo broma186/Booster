@@ -1,4 +1,4 @@
-package project.matthew.booster.UI.Models;
+package project.matthew.booster.Models;
 
 import org.simpleframework.xml.Attribute;
 

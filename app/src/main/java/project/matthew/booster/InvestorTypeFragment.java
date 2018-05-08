@@ -1,4 +1,4 @@
-package project.matthew.booster.UI;
+package project.matthew.booster;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -9,12 +9,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import project.matthew.booster.R;
-import project.matthew.booster.UI.Interfaces.InvestorTypeInterface;
+import project.matthew.booster.Interfaces.InvestorTypeInterface;
 
 /**
  * Created by Matthew on 29/04/2018.

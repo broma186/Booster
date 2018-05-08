@@ -1,6 +1,5 @@
-package project.matthew.booster.UI;
+package project.matthew.booster;
 
-import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -14,9 +13,8 @@ import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import project.matthew.booster.R;
-import project.matthew.booster.UI.Helper.Constants;
-import project.matthew.booster.UI.Interfaces.ResultInterface;
+import project.matthew.booster.Helper.Constants;
+import project.matthew.booster.Interfaces.ResultInterface;
 
 /**
  * Created by Matthew on 3/05/2018.

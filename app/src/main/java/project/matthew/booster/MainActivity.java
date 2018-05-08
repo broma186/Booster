@@ -1,8 +1,6 @@
-package project.matthew.booster.UI;
+package project.matthew.booster;
 
-import android.app.ActionBar;
 import android.content.res.Resources;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
@@ -12,9 +10,6 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.text.Spannable;
-import android.text.SpannableString;
 import android.text.SpannedString;
 import android.transitions.everywhere.TransitionManager;
 import android.view.Gravity;
@@ -23,7 +18,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -33,16 +27,15 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.realm.Realm;
 import io.realm.RealmResults;
-import project.matthew.booster.R;
-import project.matthew.booster.UI.Adapters.NavigationDrawerListAdapter;
-import project.matthew.booster.UI.Helper.Constants;
-import project.matthew.booster.UI.Helper.RealmHelper;
-import project.matthew.booster.UI.Interfaces.QuestionnaireCompletionInterface;
-import project.matthew.booster.UI.Interfaces.ActionBarSetupInterface;
-import project.matthew.booster.UI.Interfaces.NavigationSetupInterface;
-import project.matthew.booster.UI.Interfaces.QuestionnaireLoadInterface;
-import project.matthew.booster.UI.Models.Answer;
-import project.matthew.booster.UI.Models.Question;
+import project.matthew.booster.Adapters.NavigationDrawerListAdapter;
+import project.matthew.booster.Helper.Constants;
+import project.matthew.booster.Helper.RealmHelper;
+import project.matthew.booster.Interfaces.QuestionnaireCompletionInterface;
+import project.matthew.booster.Interfaces.ActionBarSetupInterface;
+import project.matthew.booster.Interfaces.NavigationSetupInterface;
+import project.matthew.booster.Interfaces.QuestionnaireLoadInterface;
+import project.matthew.booster.Models.Answer;
+import project.matthew.booster.Models.Question;
 
 import static android.view.View.GONE;
 

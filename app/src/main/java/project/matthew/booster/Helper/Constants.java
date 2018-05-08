@@ -1,4 +1,4 @@
-package project.matthew.booster.UI.Helper;
+package project.matthew.booster.Helper;
 
 /**
  * Created by Matthew on 4/05/2018.

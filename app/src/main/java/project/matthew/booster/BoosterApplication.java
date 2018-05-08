@@ -1,4 +1,4 @@
-package project.matthew.booster.UI;
+package project.matthew.booster;
 
 import android.app.Application;
 import android.util.Log;

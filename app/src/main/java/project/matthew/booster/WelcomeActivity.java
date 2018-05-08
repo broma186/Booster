@@ -1,25 +1,15 @@
-package project.matthew.booster.UI;
+package project.matthew.booster;
 
 import android.content.Intent;
 import android.content.res.Resources;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import io.realm.Realm;
-import io.realm.RealmList;
-import io.realm.RealmResults;
-import project.matthew.booster.R;
-import project.matthew.booster.UI.Helper.RealmHelper;
-import project.matthew.booster.UI.Interfaces.QuestionnaireLoadInterface;
-import project.matthew.booster.UI.Models.Answer;
-import project.matthew.booster.UI.Models.Question;
+import project.matthew.booster.Helper.RealmHelper;
+import project.matthew.booster.Interfaces.QuestionnaireLoadInterface;
 
 public class WelcomeActivity extends AppCompatActivity implements QuestionnaireLoadInterface {
 

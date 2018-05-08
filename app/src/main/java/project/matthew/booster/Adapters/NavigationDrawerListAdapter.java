@@ -1,9 +1,7 @@
-package project.matthew.booster.UI.Adapters;
+package project.matthew.booster.Adapters;
 
 import android.content.Context;
 import android.content.res.Resources;
-import android.content.res.TypedArray;
-import android.graphics.PorterDuff;
 import android.graphics.Typeface;
 import android.preference.PreferenceManager;
 import android.text.SpannableString;
@@ -17,9 +15,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import project.matthew.booster.R;
-import project.matthew.booster.UI.Helper.Constants;
-
-import static android.view.View.GONE;
+import project.matthew.booster.Helper.Constants;
 
 /**
  * Created by Matthew on 28/04/2018.

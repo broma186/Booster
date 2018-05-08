@@ -1,4 +1,4 @@
-package project.matthew.booster.UI.Helper;
+package project.matthew.booster.Helper;
 
 import java.io.IOException;
 import java.util.Date;

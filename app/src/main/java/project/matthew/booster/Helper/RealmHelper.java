@@ -1,14 +1,13 @@
-package project.matthew.booster.UI.Helper;
+package project.matthew.booster.Helper;
 
 import android.content.res.Resources;
-import android.util.Log;
 
 import io.realm.Realm;
 import io.realm.RealmList;
 import io.realm.RealmResults;
 import project.matthew.booster.R;
-import project.matthew.booster.UI.Models.Answer;
-import project.matthew.booster.UI.Models.Question;
+import project.matthew.booster.Models.Answer;
+import project.matthew.booster.Models.Question;
 
 /**
  * Created by Matthew on 8/05/2018.
