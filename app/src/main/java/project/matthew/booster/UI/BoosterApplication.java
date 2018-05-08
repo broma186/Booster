@@ -15,7 +15,7 @@ public class BoosterApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        Log.d("QuestionnaireFragment", "onCreate: ");
+
         Realm.init(getApplicationContext());
         RealmConfiguration config = new RealmConfiguration.Builder().schemaVersion(1)
                 .build();

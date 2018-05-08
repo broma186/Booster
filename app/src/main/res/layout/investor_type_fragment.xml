@@ -1,40 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/boosterGreen"
-    android:orientation="vertical"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    android:background="@color/boosterGreen">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/investor_type_frag_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/circular_book_bold"
+            android:gravity="center_horizontal"
+            android:text="title"
+            android:textColor="@color/colorBooster"
+            android:textSize="25sp" />
 
-<TextView
-    android:id="@+id/investor_type_frag_title"
-    android:layout_width="wrap_content"
-    android:layout_gravity="center_horizontal"
-    android:gravity="center_horizontal"
-    android:layout_marginTop="10dp"
-    android:textSize="25sp"
-    android:fontFamily="@font/circular_book_bold"
-    android:textColor="@color/colorBooster"
-    android:text="title"
-    android:layout_height="wrap_content" />
+        <ImageView
+            android:id="@+id/investor_type_pie_graph"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:gravity="center_horizontal" />
 
-    <ImageView
-        android:id="@+id/investor_type_pie_graph"
-        android:layout_marginTop="10dp"
-        android:layout_gravity="center_horizontal"
-        android:gravity="center_horizontal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-    <TextView
-        android:id="@+id/investor_type_description"
-        android:text="This is sample investor type description text. Hopefully the text will wrap correctly as you would expect"
-        android:textSize="18sp"
-        android:fontFamily="@font/circular_book"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp"
-        android:layout_marginTop="10dp"
-        android:textAlignment="center"
-        android:textColor="@color/colorBooster"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-</LinearLayout>
+        <TextView
+            android:id="@+id/investor_type_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/circular_book"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:text="This is sample investor type description text. Hopefully the text will wrap correctly as you would expect"
+            android:textAlignment="center"
+            android:textColor="@color/colorBooster"
+            android:textSize="18sp" />
+    </LinearLayout>
+</ScrollView>

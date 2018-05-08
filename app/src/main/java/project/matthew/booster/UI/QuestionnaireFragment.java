@@ -39,6 +39,8 @@ import project.matthew.booster.UI.Models.Question;
 public class QuestionnaireFragment extends Fragment {
 
     private View rootView;
+    private Typeface mFont;
+    List<Question> questions;
 
     @BindView(R.id.questionnaire_layout)
     LinearLayout questionnaireLayout;
@@ -57,20 +59,13 @@ public class QuestionnaireFragment extends Fragment {
                 .commitAllowingStateLoss();
     }
 
-    private Typeface mFont;
-
-    List<Question> questions;
-
-    private static final String TAG = "QuestionnaireFragment";
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.questionnaire_fragment, container, false);
         ButterKnife.bind(this, rootView);
 
-
         mFont = Typeface.createFromAsset(getActivity().getAssets(),"circular_book.ttf");
-
 
         Realm realm = Realm.getDefaultInstance();
         RealmResults<Question> questionsFromRealm = realm.where(Question.class).findAll();
@@ -134,9 +129,7 @@ public class QuestionnaireFragment extends Fragment {
                             realm.commitTransaction();
                             realm.close();
 
-                            if (((MainActivity) getActivity()).checkDone() && resultsButton.getVisibility() != View.VISIBLE) {
-                                resultsButton.setVisibility(View.VISIBLE);
-                            }
+                            setResultsVisibleIfDone(); // Check if questionnaire complete every radio button select change.
                         }
                     });
                     for (final Answer answer : question.getAnswers()) {
@@ -157,11 +150,18 @@ public class QuestionnaireFragment extends Fragment {
                     outerGroup.addView(answerGroup);
                 }
             }
-            if (((MainActivity) getActivity()).checkDone() && resultsButton.getVisibility() != View.VISIBLE) {
-                resultsButton.setVisibility(View.VISIBLE);
-            }
+            setResultsVisibleIfDone(); // Every time UI loads, check if questionnaire complete.
         }
         return rootView;
+    }
+
+    /**
+     * If the questionnaire is done, show the results button.
+     */
+    private void setResultsVisibleIfDone() {
+        if (((MainActivity) getActivity()).checkDone() && resultsButton.getVisibility() != View.VISIBLE) {
+            resultsButton.setVisibility(View.VISIBLE);
+        }
     }
 
 }

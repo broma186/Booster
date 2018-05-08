@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Booster</string>
+    <string name="app_name">Matt Booster Test</string>
     <string name="welcome">Welcome!</string>
     <string name="menu_title">main_menu_title</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
@@ -17,7 +17,13 @@
     <string name="aggressive_growth_title">Aggressive Growth</string>
     <string name="submit_title">Submit</string>
     <string name="questionnaire_title">Questionnaire</string>
-<string name="capital_guarantee_fund">The fund aims to provide relatively consistent returns, subject to a capital guarantee.
+
+    <string name="host">smtp.gmail.com</string>
+    <string name="port">587</string>
+    <string name="username">matthewboostertest@gmail.com</string>
+    <string name="password">matthiasb</string>
+    <string name="subject"> Booster Investment Questionnair</string>
+    <string name="capital_guarantee_fund">The fund aims to provide relatively consistent returns, subject to a capital guarantee.
 It aims to achieve returns – after fees but before tax – of at least 1.5% per year above inflation over any 2-year period.
 Generally, there may be small movements up and down in the value of the fund.</string>
 <string name="default_saver_fund">The fund aims to provide relatively consistent but modest returns, with some capital gains over the long term.

@@ -1,6 +1,7 @@
 package project.matthew.booster.UI;
 
 import android.app.ActionBar;
+import android.content.res.Resources;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -35,9 +36,11 @@ import io.realm.RealmResults;
 import project.matthew.booster.R;
 import project.matthew.booster.UI.Adapters.NavigationDrawerListAdapter;
 import project.matthew.booster.UI.Helper.Constants;
+import project.matthew.booster.UI.Helper.RealmHelper;
 import project.matthew.booster.UI.Interfaces.QuestionnaireCompletionInterface;
 import project.matthew.booster.UI.Interfaces.ActionBarSetupInterface;
 import project.matthew.booster.UI.Interfaces.NavigationSetupInterface;
+import project.matthew.booster.UI.Interfaces.QuestionnaireLoadInterface;
 import project.matthew.booster.UI.Models.Answer;
 import project.matthew.booster.UI.Models.Question;
 
@@ -47,7 +50,7 @@ import static android.view.View.GONE;
  * Created by Matthew on 27/04/2018.
  */
 
-public class MainActivity extends AppCompatActivity implements ActionBarSetupInterface, NavigationSetupInterface, QuestionnaireCompletionInterface {
+public class MainActivity extends AppCompatActivity implements QuestionnaireLoadInterface, ActionBarSetupInterface, NavigationSetupInterface, QuestionnaireCompletionInterface {
 
     @BindView(R.id.nav_drawer_layout)
     DrawerLayout mDrawerLayout;
@@ -70,12 +73,19 @@ public class MainActivity extends AppCompatActivity implements ActionBarSetupInt
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
+        loadQuestionsAndAnswers();
+
         hideActionBarTitle();
         setupNavigationDrawer();
 
         checkDone();
     }
 
+    /**
+     * Creates menu layout with icon and menu icon by assigning a custom view to the action bar.
+     * @param menu Not used except to call super.
+     * @return
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         android.support.v7.app.ActionBar actionBar = getSupportActionBar();
@@ -85,6 +95,10 @@ public class MainActivity extends AppCompatActivity implements ActionBarSetupInt
         return super.onCreateOptionsMenu(menu);
     }
 
+    /**
+     * Open or close drawer toggle.
+     * @param view
+     */
     public void openDrawer(View view) {
         if (!mDrawerLayout.isDrawerOpen(Gravity.START)) {
             mDrawerLayout.openDrawer(Gravity.START);
@@ -113,6 +127,10 @@ public class MainActivity extends AppCompatActivity implements ActionBarSetupInt
     }
 
 
+    /**
+     * Init method of nav drawer and assigning the adapter to the list view. Also sets
+     * on item select listener.
+     */
     @Override
     public void setupNavigationDrawer() {
         mNavDrawerAdapter = new NavigationDrawerListAdapter(this);
@@ -149,8 +167,8 @@ public class MainActivity extends AppCompatActivity implements ActionBarSetupInt
                             showFragment(position, new QuestionnaireFragment(), itemTitle);
                             break;
                         case "Submit":
-                            hideMainInfoText(adapterView);
                             if (PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getBoolean(Constants.QUESTIONNAIRE_COMPLETE, false)) {
+                                hideMainInfoText(adapterView);
                                 showFragment(position, new SubmissionFragment(), itemTitle);
                             }
                             break;
@@ -165,6 +183,10 @@ public class MainActivity extends AppCompatActivity implements ActionBarSetupInt
         mDrawerLayout.addDrawerListener(mActionBarDrawerToggle);
     }
 
+    /**
+     * Hides the initial app info with transition object.
+     * @param adapterView
+     */
     private void hideMainInfoText(AdapterView<?> adapterView) {
         TransitionManager.beginDelayedTransition((ViewGroup) adapterView.getRootView());
         mainInfoText.setVisibility(GONE); // Hide the main app info text.
@@ -172,8 +194,9 @@ public class MainActivity extends AppCompatActivity implements ActionBarSetupInt
 
 
     public void showFragment(int position, Object fragment, String fragmentTag) {
-        mDrawerLayout.closeDrawer(GravityCompat.START);
-
+        if (mDrawerLayout.isDrawerOpen(GravityCompat.START)) { // Close drawer if needed.
+            mDrawerLayout.closeDrawer(GravityCompat.START);
+        }
         // Remove the current fragment
         if (mCurrentFragment != null) {
             if (mCurrentFragment instanceof Fragment) {
@@ -231,6 +254,26 @@ public class MainActivity extends AppCompatActivity implements ActionBarSetupInt
     public boolean checkDone() {
         Realm realm = Realm.getDefaultInstance();
 
+        setQuestionnaireScore(realm); // Sum up scores from answered questions.
+
+        RealmResults<Question> questionsFromRealm = realm.where(Question.class).findAll();
+        RealmResults<Question> answeredQuestions = realm.where(Question.class).equalTo("isAnswered", true).findAll();
+        realm.close();
+
+        // If all questions have been answered, return 'yes the questionnaire is done'
+        if (questionsFromRealm.size() == answeredQuestions.size()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Add up the total score by getting the sum of each answer radio button value if it selected.
+     *
+     * @param realm
+     */
+    private void setQuestionnaireScore(Realm realm) {
         RealmResults<Answer> answersFromRealm = realm.where(Answer.class).findAll();
         final List<Answer> answers = realm.copyFromRealm(answersFromRealm);
         int tempScore = 0;
@@ -240,16 +283,14 @@ public class MainActivity extends AppCompatActivity implements ActionBarSetupInt
             }
         }
         setScore(tempScore);
-
-        RealmResults<Question> questionsFromRealm = realm.where(Question.class).findAll();
-        RealmResults<Question> answeredQuestions = realm.where(Question.class).equalTo("isAnswered", true).findAll();
-
-        if (questionsFromRealm.size() == answeredQuestions.size()) {
-            return true;
-        } else {
-            return false;
-        }
     }
 
-
+    /**
+     * Used when the user has reloaded the app after sending questinnaire results.
+     */
+    @Override
+    public void loadQuestionsAndAnswers() {
+        Resources res = getResources();
+        RealmHelper.initQuestionsAndAnswers(res);
+    }
 }

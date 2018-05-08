@@ -24,6 +24,7 @@ import project.matthew.booster.R;
 import project.matthew.booster.UI.Helper.Constants;
 import project.matthew.booster.UI.Helper.Emailer;
 import project.matthew.booster.UI.Helper.FormHelper;
+import project.matthew.booster.UI.Helper.RealmHelper;
 import project.matthew.booster.UI.Interfaces.SubmissionInterface;
 import project.matthew.booster.UI.Models.Answer;
 import project.matthew.booster.UI.Models.Question;
@@ -40,6 +41,10 @@ public class SubmissionFragment extends Fragment implements SubmissionInterface 
 
     private String host, port, username, password, toAddress, subject;
 
+    /**
+     * Send the results to an email address on new thread if form valid.
+     * @param view The submit button.
+     */
     @OnClick(R.id.submit_button)
     public void validateAndSubmitQuestionnaire(View view) {
         String validMessage = isFormValid();
@@ -65,6 +70,9 @@ public class SubmissionFragment extends Fragment implements SubmissionInterface 
         return rootView;
     }
 
+    /**
+     * Show progress dialog on the main thread.
+     */
     private void showProgressDialog() {
         getActivity().runOnUiThread(new Runnable() {
             @Override
@@ -78,6 +86,9 @@ public class SubmissionFragment extends Fragment implements SubmissionInterface 
         });
     }
 
+    /**
+     * Dismiss progress dialog on the main thread.
+     */
     private void hideProgressDialog() {
         getActivity().runOnUiThread(new Runnable() {
             @Override
@@ -87,13 +98,17 @@ public class SubmissionFragment extends Fragment implements SubmissionInterface 
         });
     }
 
+    /**
+     * Gets needed parameters and sends the results to the email addres specified in the form by the
+     * user.
+     */
     private void sendEmail() {
-        host = "smtp.gmail.com";
-        port = "587";
-        username = "matthewboostertest@gmail.com";
-        password = "matthiasb";
+        host = getString(R.string.host);
+        port = getString(R.string.port);
+        username = getString(R.string.username);
+        password = getString(R.string.password);
         toAddress = email;
-        subject = username + " Booster Investment Questionnaire";
+        subject = username + getString(R.string.subject);
 
         String message = "Results: " + ((MainActivity) getActivity()).getScore() + "\nName: " + name +
                 "\nEmail: " + email + "\nPhone: " + phone;
@@ -113,7 +128,10 @@ public class SubmissionFragment extends Fragment implements SubmissionInterface 
         }
     }
 
-
+    /**
+     * Validate the submission form, enforcing correct email regex.
+     * @return String. A possible error message is something wrong with form input.
+     */
     @Override
     public String isFormValid() {
         name = ((EditText) rootView.findViewById(R.id.name)).getText().toString();
@@ -132,13 +150,15 @@ public class SubmissionFragment extends Fragment implements SubmissionInterface 
         return null;
     }
 
+    /**
+     * Displays a dialog indicating email send success, on the main thread.
+     */
     @Override
     public void showSuccessDialog() {
         getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
                 pd.dismiss();
-                Toast.makeText(getContext(), "Successfully emailed results to: " + toAddress, Toast.LENGTH_SHORT).show();
                 AlertDialog.Builder bl = new AlertDialog.Builder(getActivity());
                 bl.setTitle("Results Sent");
                 bl.setMessage("Successfully emailed results to: " + toAddress);
@@ -154,6 +174,10 @@ public class SubmissionFragment extends Fragment implements SubmissionInterface 
         });
     }
 
+    /**
+     * Calls methods to lower questionnaire completion flag, delete all Q/A from Realm and restart
+     * the app using an intent.
+     */
     @Override
     public void clearResultsAndStartAgain() {
         clearQuestionnaireCompleteFlag();
@@ -161,26 +185,26 @@ public class SubmissionFragment extends Fragment implements SubmissionInterface 
         startAppAgain();
     }
 
+    /**
+     * Removes the questionnaire completion flag from default SharedPreferences.
+     */
     @Override
     public void clearQuestionnaireCompleteFlag() {
         PreferenceManager.getDefaultSharedPreferences(getContext()).edit().remove(Constants.QUESTIONNAIRE_COMPLETE).commit();
     }
 
+    /**
+     * Deletes all questions and answers stored in Realm.
+     */
     @Override
     public void clearQuestionsAndAnswers() {
         // Delete all questions and answers from realm.
-        Realm realm = Realm.getDefaultInstance();
-        RealmResults<Question> questions = realm.where(Question.class).findAll();
-        RealmResults<Answer> answers = realm.where(Answer.class).findAll();
-        realm.beginTransaction();
-        questions.deleteAllFromRealm();
-        realm.commitTransaction();
-        realm.beginTransaction();
-        answers.deleteAllFromRealm();
-        realm.commitTransaction();
-        realm.close();
+        RealmHelper.clearAll();
     }
 
+    /**
+     * Starts the MainActivity again using the clear top flag.
+     */
     @Override
     public void startAppAgain() {
         // Start the main activity again.

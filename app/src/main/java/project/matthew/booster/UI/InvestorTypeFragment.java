@@ -40,7 +40,8 @@ public class InvestorTypeFragment extends Fragment implements InvestorTypeInterf
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.investor_type_fragment, container, false);
         ButterKnife.bind(this, rootView);
-        mInvestorType = getTag();
+
+        mInvestorType = getTag(); // Passed through from main activity.
 
         investorTypeFragTitle.setText(mInvestorType);
 

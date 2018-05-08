@@ -1,5 +1,6 @@
 package project.matthew.booster.UI;
 
+import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -28,6 +29,7 @@ public class ResultFragment extends Fragment implements ResultInterface {
     private int navPosForInvestorTypeShow;
     private String investorTypeTitle;
     private FragmentManager mFragmentManager;
+    private int score;
 
     @BindView(R.id.total_score)
     TextView totalScore;
@@ -38,14 +40,14 @@ public class ResultFragment extends Fragment implements ResultInterface {
     @BindView(R.id.investment_result)
     TextView investmentResult;
 
-
+    /**
+     * Show the investor type fund respective to the results.
+     * @param view
+     */
     @OnClick(R.id.show_button)
     public void goToInvestorType(View view) {
-        //this will clear the back stack and displays no animation on the screen
         ((MainActivity) getActivity()).showFragment(navPosForInvestorTypeShow, new InvestorTypeFragment(), investorTypeTitle);
     }
-
-    private int score;
 
     @Nullable
     @Override
@@ -64,11 +66,15 @@ public class ResultFragment extends Fragment implements ResultInterface {
         return rootView;
     }
 
+    // Set the SP flag indicating that the user has completed the questionnaire (has answers for all questions).
     @Override
     public void setQuestionnaireComplete() {
         PreferenceManager.getDefaultSharedPreferences(getContext()).edit().putBoolean(Constants.QUESTIONNAIRE_COMPLETE, true).commit();
     }
 
+    /**
+     * Set the score, investor type textviews to display results.
+     */
     @Override
     public void showScore() {
         Resources res = mainActivity.getResources();
