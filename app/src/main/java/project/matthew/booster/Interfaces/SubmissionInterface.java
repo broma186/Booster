@@ -11,4 +11,5 @@ public interface SubmissionInterface {
     public void clearQuestionnaireCompleteFlag();
     public void startAppAgain();
     public void showSuccessDialog();
+    public void showFailureToast();
 }

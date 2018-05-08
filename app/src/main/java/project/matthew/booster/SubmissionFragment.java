@@ -121,7 +121,7 @@ public class SubmissionFragment extends Fragment implements SubmissionInterface 
         if (success) {
             showSuccessDialog();
         } else {
-            Toast.makeText(getContext(), "Failed to send results", Toast.LENGTH_LONG).show();
+            showFailureToast();
         }
     }
 
@@ -167,6 +167,19 @@ public class SubmissionFragment extends Fragment implements SubmissionInterface 
                 });
                 bl.setNegativeButton("Ok", null);
                 bl.create().show();
+            }
+        });
+    }
+
+    /**
+     * Warn user that sending the email failed.
+     */
+    @Override
+    public void showFailureToast() {
+        getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                Toast.makeText(getContext(), "Failed to send results", Toast.LENGTH_LONG).show();
             }
         });
     }
