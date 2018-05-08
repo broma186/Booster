@@ -100,7 +100,6 @@ public class NavigationDrawerListAdapter extends ArrayAdapter<String> {
         }
         // Hide Submit option if the questionnaire has not been completed yet.
         if (tvTitle.getText().equals(res.getString(R.string.submit_title)) && !PreferenceManager.getDefaultSharedPreferences(context).getBoolean(Constants.QUESTIONNAIRE_COMPLETE, false)) {
-            Log.d("navo", "getView: setting text colour");
             tvTitle.setTextColor(res.getColor(R.color.text_disabled));
         }
         return convertView;
